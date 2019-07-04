@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+    {% block first_row %}
+
+        <div style="background-color: #345A61; padding: 40 40 20 40; opacity: 0.80;" class="rounded">
+
+        {% if user.is_authenticated %}
+        <h1 style="color:white">Du gras oui, mais de qualité !</h1>
+        <h3 style="color:white">{{user.username}}, trouvez un produit de substitution pour ceux que vous consommez tous les jours</h3> 
+        {% else %}
+        <h1 style="color:white">Du gras oui, mais de qualité !</h1>
+        <h3 style="color:white">Cher(e) visiteur(euse), trouvez un produit de substitution pour ceux que vous consommez tous les jours </h3> 
+        {% endif %}
+
+        </div>
+
+
+                
+        <form method="post" class="form-inline justify-content-center search_container rounded" style="margin-top: 80px" novalidate>
+            {% csrf_token%}
+            {{ form|crispy }}
+            <button class= "btn btn-primary ml-4" type="submit">Chercher</button>
+        </form>
+
+        {% if res is not None %}
+
+            <div class="first_row_window rounded">
+
+            {% for r in res %}
+            <li><a href="{{ r.id }}">{{ r.product_name }}</a></li>
+            {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+        
+    
+    {% endblock %}
+
+
+    {% block second_row %}
+
+    <div class="container-fluid" style="padding-left:40px;padding-right:40px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center" style="margin-top:40px;">
+                        Colette & Remy
+                    </h2>
+                    <h3 class="text-center">------</h3>
+                    <h3 class="bold">De la ratatouille aux croissants</h3>
+                    <p>                    
+                    Pur Beurre est l'initiative de deux amoureux de la gastronomie française, Colette Tatou et Rémy, que vous avez déjà certainement rencontrés dans notre excellent restaurant Ratatouille. 
+                    <br>
+                    </br>
+                    <em>
+                    <strong>Colette Tatou :</strong>"Nous aimons tous manger, surtout en France ! Personnellement, une baguette fraîche, du bon fromage de chèvre et un bon vin rouge me suffisent amplement. Comme tout le monde, je fais mes courses au supermarché. Mais petit à petit je me suis rendue compte, surtout lorsque nous avons ouvert le restaurant, que je pouvais remplacer les produits aseptisés que j'avais l'habitude d'acheter par de bons produits du terroir Et souvent pour le même prix !"
+                    <br>
+                    </br>
+                    <strong>Remy :</strong> "Pour ma part je me rendais déjà dans bien des magasins car j'aime beaucoup me balader, surtout dans les caves et les cuisines. Je connaissais par coeur le contenu des boutiques bio (dont je raffole) ainsi que les ingrédients de tous les aliments vendus. Lorsque Colette m'a demandé si elle pouvait remplacer son Nutella matinal par un aliment plus sain, je savais tout de suite où le trouver. L'idée de Pur Beurre était née !"
+                    </em>
+            </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">                    
+                    <img alt="Ratatouille" src="{% static 'core/ratatouille-portrait.jpg' %}" style="height: 280px;margin-top: 200px;" class="float-right"/>
+                </div>
+                <div class="col-md-6">
+                    <img alt="Colette" src="{% static 'core/colette-tatou-full.png' %}" />
+                </div>
+                
+            </div>
+        </div>
+
+    {% endblock %}

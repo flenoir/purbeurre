@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block first_row %}
+
+<div class="first_row_window rounded">
+
+    {% if full_list %}
+    <ul>
+    {% for product in full_list %}
+        <li><a href="/search/{{ product.id }}/">{{ product.product_name }}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>Aucun produit n'est disponible</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

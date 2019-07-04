@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block first_row %}
+
+<h1>Substitute food with a better nutriscore</h1>
+
+<div class="row first_row_window rounded">
+		<div class="col-md-8">
+			<h3>
+				{{ product }}
+      </h3>
+      
+      <p style="display:none">{{ product.id  }}</p>
+
+      {%  if  status != "" %}
+			<div class="alert alert-danger alert-dismissable">
+				 
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+					×
+				</button>
+				<h4>
+					Alerte Produit !
+				</h4>  {{ status }} <a href="#" class="alert-link"></a>
+      </div>
+      {% endif %}
+
+			<dl>
+				<dt>Product code :</dt>
+				<dd>{{ code }}</dd>
+				<dt>
+					Nutriscore :
+				</dt>
+				<dd>
+					{{ nutriscore }}
+				</dd>			
+				<dt>
+					Novagroup :
+				</dt>
+				<dd>
+					{{ nova_groups }}
+				</dd>
+				<dt>
+					Categories :
+				</dt>
+				<dd>
+					{{ categories }}
+				</dd>
+      </dl> 
+      
+      <a class="btn btn-secondary" href="{% url 'add_substitute' id product.id %}" role="button">Add to substitute list</a>
+	
+		</div>
+		<div class="col-md-4 ml 4">
+			<img alt="{{ product }}" src="{{ image }}" class="rounded" />
+		</div>
+	</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block first_row %}
+
+<h1>Your selected food</h1>
+
+  <div class="row first_row_window rounded">
+		<div class="col-md-8">
+			<h3>
+				{{ product }}
+			</h3>
+
+			<dl>
+				<dt>Product code :</dt>
+				<dd>{{ code }}</dd>
+				<dt>
+					Nutriscore :
+				</dt>
+				<dd>
+					{{ nutriscore }}
+				</dd>			
+				<dt>
+					Novagroup :
+				</dt>
+				<dd>
+					{{ nova_groups }}
+				</dd>
+				<dt>
+					Categories :
+				</dt>
+				<dd>
+					{{ categories }}
+				</dd>
+      </dl> 
+      
+      <a class="btn btn-warning" href="/search/swap/{{product.id}}" role="button">Swap</a>
+
+		</div>
+		<div class="col-md-4 ml 4">
+			<img alt="{{ product }}" src="{{ image }}" class="rounded" />
+		</div>
+	</div>
+
+{% endblock %}
