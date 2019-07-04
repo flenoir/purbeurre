@@ -39,15 +39,15 @@
                       {{ user.email }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>  
-                      <a class="dropdown-item" href="{% url 'logout' %}">Disconnect</a>
+                      <a class="dropdown-item" href="/accounts/password/change/">Change password</a>  
+                      <a class="dropdown-item" href="{% url 'account_logout' %}">Disconnect</a>
                     </div>
                     {% else %}                      
                        Visitor
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                       <a class="dropdown-item" href="{% url 'signup' %}">Sign up</a>  
-                       <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                       <a class="dropdown-item" href="{% url 'account_signup' %}">Sign up</a>  
+                       <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
                       </div>
                     {% endif %}                                         
                   </div>

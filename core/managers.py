@@ -5,12 +5,13 @@ class CustomUserManager(BaseUserManager):
     """
     Overriding BaseUserManager in order to allow users to register and authenticate by using email instead of username.
     """
-    def create_user(self, email, password=None, **kwargs):
+    def create_user(self, email, username=None, password=None, **kwargs):
         if not email:
             raise ValueError('Email field is required')
 
         email = self.normalize_email(email)
         user = self.model(email=email, **kwargs)
+        username = self.username
         user.set_password(password)
         user.save()
         return user

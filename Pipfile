@@ -11,6 +11,7 @@ requests = "*"
 django-crispy-forms = "*"
 psycopg2 = "*"
 stop-words = "*"
+django-allauth = "*"
 
 [requires]
 python_version = "3.6"
