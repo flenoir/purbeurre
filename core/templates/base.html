@@ -19,14 +19,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link main_title" style="color: white;" href="/search/">Pure Beurre<span class="sr-only">(current)</span></a>
+                        <a class="nav-link main_title" style="color: white;" href="{% url 'search:index' %}">Pure Beurre<span class="sr-only">(current)</span></a>
                     </li>           
                                        
                     </ul>
                     <!-- <form class="form-inline my-2 my-lg-0"> -->
                     {% if user.is_authenticated %}
                     
-                    <a href="search/list_products.html"><img src="{% static 'core/noun_Carrot_29691_cropped.png' %}" height=50px></a>  
+                    <a href="{% url 'search:list_products' %}"><img src="{% static 'core/noun_Carrot_29691_cropped.png' %}" height=50px></a>  
                                   
                     {% else %}                    
                     {% endif %}
@@ -36,7 +36,7 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle ml-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {% if user.is_authenticated %}
-                      {{ user.username }}
+                      {{ user.email }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>  

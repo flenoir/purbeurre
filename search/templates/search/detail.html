@@ -33,7 +33,8 @@
 				</dd>
       </dl> 
       
-      <a class="btn btn-warning" href="/search/swap/{{product.id}}" role="button">Swap</a>
+	  <a class="btn btn-warning" href="{% url 'search:swap' product.id %}" role="button">Swap</a>
+	  <!-- /search/swap/{{product.id}}  -->
 
 		</div>
 		<div class="col-md-4 ml 4">

@@ -1,0 +1,44 @@
+body {
+    /* background-color: bisque; */
+    /* background-image: url(kawin-harasai-k60JspcBwKE-unsplash.jpg);
+    background-size: 100% auto; */
+}
+
+.first_row_bg {
+    background-image: url(kawin-harasai-k60JspcBwKE-unsplash.jpg);
+    background-size: 100% auto;
+    height: 1000px;
+    padding-top: 100px;
+}
+
+.first_row_window {
+    background-color: aliceblue; 
+    opacity: 0.95;
+    padding-top: 50px;
+    padding-left: 20px;
+    height: 650px;
+}
+
+.navbar-default {
+    /* background-color:  #C45525; */
+    /* border-color: #E7E7E7; */
+}
+
+.main_title {
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+    font-style: bold;
+    font-weight: 400;
+    }
+
+.rounded {
+    border-radius:.75rem!important
+}
+
+.search_container {
+    background-color: #DE9440; 
+    opacity: 1;
+    padding: 20 20 20 20;
+    height: 90px;
+
+}
