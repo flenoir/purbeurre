@@ -4,6 +4,7 @@ from search.search_form import SearchForm
 from django.contrib.auth.decorators import login_required
 from stop_words import get_stop_words
 from django.db.models import Q
+from random import randrange
 
 from .models import Product
 from core.models import CustomUser
@@ -64,20 +65,21 @@ def swap(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     splited = product.categories.split(",")    
-    categories_res = Product.objects.filter(categories__contains=splited[0]).filter(categories__contains=splited[1]).filter(categories__contains=splited[2])
-    
+    categories_res = Product.objects.filter(categories__contains=splited[0]).filter(categories__contains=splited[1]).filter(categories__contains=splited[2]).filter(nutriscore__lt=product.nutriscore)
+    # print(categories_res)
+    # print(product.nutriscore)
     arr = []
     for x in categories_res:        
         z = compare_products(x, product)
-        if z is not None:
+        if z is not None:            
             arr.append(z)
 
     if bool(arr) is False:
         substitute = product
         json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(),'image': substitute.product_image,'status': 'no better product found', 'id': product_id}
-    else: 
-        substitute = arr[0][0]
-        print(substitute.product_code)        
+    else:        
+        substitute = arr[randrange(len(arr))][0] #select substitute randomly among all better products
+        # print(substitute.product_code)        
         json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(),'image': substitute.product_image,'status': '', 'id': product_id}
    
     return render(request, 'search/swap.html', json_data)
@@ -88,16 +90,18 @@ def compare_products(x, y):
 
     abc = ["a","b","c","d","e","f","g"]
     # if x location's index in abc is lower than y location's index then...
-    res1 = abc.index(x.nutriscore)
-    res2 = abc.index(y.nutriscore)
-    print(res1, res2)
+    better = abc.index(x.nutriscore)
+    original = abc.index(y.nutriscore)
+    # print(better, original)
+
+    # print(x.nutriscore, y.nutriscore)
     
-    if res1 < res2:
+    if better < original:
         # print("better product")        
         return x, x.id
     # else:
     #     print("worse product")
-        
+   
 
 @login_required
 def list_products(request):
@@ -113,7 +117,7 @@ def add_substitute(request, product_id, subs_id):
     current_user = request.user
 
     # add current substitute to current_user using fk relation    
-    product_to_associate = Product.objects.get(id=product_id)    
+    product_to_associate = Product.objects.get(id=product_id)    # to delete
     user_to_associate = CustomUser.objects.get(email=current_user)
     user_to_associate.user_substitutes.add(subs_id)
 
