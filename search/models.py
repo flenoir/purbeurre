@@ -22,7 +22,7 @@ class Product(models.Model):
     nova_groups = models.CharField(max_length=5, null=True)
     categories = models.CharField(max_length=500, null=True)
     substitutes = models.ManyToManyField("self")
-    user_product = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    # user_product = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     # @classmethod
     # def associate(cls, current_product_id, substitute_product):

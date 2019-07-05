@@ -1,4 +1,5 @@
 from django.db import models
+from search.models import Product
 
 # Create your models here.
 
@@ -12,6 +13,7 @@ from .managers import CustomUserManager
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=True)
     username = models.CharField(max_length=100, null=True)
+    user_substitutes = models.ManyToManyField(Product)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,

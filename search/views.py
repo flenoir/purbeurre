@@ -6,6 +6,7 @@ from stop_words import get_stop_words
 from django.db.models import Q
 
 from .models import Product
+from core.models import CustomUser
 
 # Create your views here.
 
@@ -111,10 +112,10 @@ def add_substitute(request, product_id, subs_id):
 
     current_user = request.user
 
-    # add current substitute to searched product using fk relation    
+    # add current substitute to current_user using fk relation    
     product_to_associate = Product.objects.get(id=product_id)    
-    product_to_associate.user_product.set([current_user]) # why do we need to put brackets here ??
-    product_to_associate.associate(subs_id)
+    user_to_associate = CustomUser.objects.get(email=current_user)
+    user_to_associate.user_substitutes.add(subs_id)
 
     context = get_substitutes(current_user)
 
@@ -123,12 +124,14 @@ def add_substitute(request, product_id, subs_id):
 
 def get_substitutes(current_user):
     # redirect to substitute list of connected user
-    substitutes_list = Product.objects.filter(substitutes__isnull=False).filter(user_product=current_user)
+    # substitutes_list = Product.objects.filter(substitutes__isnull=False).filter(user_product=current_user)
+    substitutes_list = CustomUser.objects.filter(user_substitutes__isnull=False).filter(email=current_user)
+    # print(substitutes_list)
     
-    sub_list = []
-    for i in substitutes_list:
-        for j in i.substitutes.all():            
-            sub_list.append(j)
+    
+    main_sub_list = [i for i in substitutes_list]
+    sub_list = [j for j in main_sub_list[0].user_substitutes.all()]
+
 
     context = {
         'full_list': sub_list
