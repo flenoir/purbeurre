@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block first_row %}
-
-<h1>Your selected food</h1>
+<div style="background-color: chocolate; padding: 10 20 10 20;opacity:0.85;" class="rounded">
+<h1 style="-webkit-text-fill-color: white;">Your selected food</h1>
+</div>
 
   <div class="row first_row_window rounded">
 		<div class="col-md-8">
@@ -38,7 +39,7 @@
 
 		</div>
 		<div class="col-md-4 ml 4">
-			<img alt="{{ product }}" src="{{ image }}" class="rounded" />
+			<img alt="{{ product }}" src="{{ image }}" class="img-fluid rounded" />
 		</div>
 	</div>
 
