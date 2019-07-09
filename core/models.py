@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True, null=True)
+    email = models.EmailField(unique=True, null=True)  # not null
     username = models.CharField(max_length=100, null=True)
     user_substitutes = models.ManyToManyField(Product)
     is_staff = models.BooleanField(

@@ -65,7 +65,7 @@ def swap(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     splited = product.categories.split(",")    
-    categories_res = Product.objects.filter(categories__contains=splited[0]).filter(categories__contains=splited[1]).filter(categories__contains=splited[2]).filter(nutriscore__lt=product.nutriscore)
+    categories_res = Product.objects.filter(categories__contains=splited[0]).filter(categories__contains=splited[1]).filter(categories__contains=splited[2]).filter(nutriscore__lt=product.nutriscore) #order_by(?) + slice sur le 1er
     # print(categories_res)
     # print(product.nutriscore)
     arr = []
