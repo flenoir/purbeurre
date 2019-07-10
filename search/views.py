@@ -56,6 +56,9 @@ def detail(request, product_id):
     json_data = {'product': product, 'code': product.product_code, 'nova_groups': product.nova_groups, 'categories': product.categories, 'nutriscore': product.nutriscore.capitalize(), 'image': product.product_image}
     return render(request, 'search/detail.html', json_data)
 
+def mentions(request):
+    return render(request, 'search/mentions_legales.html')
+
 def swap(request, product_id):
     """ 
     get categories form request
