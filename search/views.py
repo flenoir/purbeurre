@@ -125,20 +125,18 @@ def add_substitute(request, product_id, subs_id):
 
     return render(request, 'search/list_products.html', context)
 
-
 def get_substitutes(current_user):
     # redirect to substitute list of connected user
-    # substitutes_list = Product.objects.filter(substitutes__isnull=False).filter(user_product=current_user)
     substitutes_list = CustomUser.objects.filter(user_substitutes__isnull=False).filter(email=current_user)
-    # print(substitutes_list)
     
-    
-    main_sub_list = [i for i in substitutes_list]
-    sub_list = [j for j in main_sub_list[0].user_substitutes.all()]
+    if not substitutes_list:
+        return None
+    else:
+        main_sub_list = [i for i in substitutes_list]
+        sub_list = [j for j in main_sub_list[0].user_substitutes.all()]
 
+        context = {
+            'full_list': sub_list
+        }
 
-    context = {
-        'full_list': sub_list
-    }
-
-    return context
+        return context
