@@ -19,6 +19,13 @@ body {
     height: 650px;
 }
 
+.connexion_row_windows {
+    background-color: aliceblue; 
+    opacity: 0.95;
+    padding-left: 10px;
+    height: 200px;
+}
+
 .navbar-default {
     /* background-color:  #C45525; */
     /* border-color: #E7E7E7; */

@@ -24,34 +24,25 @@
                     </li>           
                                        
                     </ul>
-                    <!-- <form class="form-inline my-2 my-lg-0"> -->
+                 
+                </div>                
+                
                     {% if user.is_authenticated %}
+                    <button class="btn btn-secondary mr-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ user.email }}
+                    </button>
                     
                     <a href="{% url 'search:list_products' %}"><img src="{% static 'core/noun_Carrot_29691_cropped.png' %}" height=50px></a>  
-                                  
-                    {% else %}                    
-                    {% endif %}
-                    <!-- </form> -->
-                </div>
-                
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle ml-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {% if user.is_authenticated %}
-                      {{ user.email }}
+                                     
+                    <button class="btn btn-default ml-2">
+                    <a class="btn btn-default" href="{% url 'account_logout' %}">Disconnect</a>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <!-- <a class="dropdown-item" href="/accounts/password/change/">Change password</a>   -->
-                      <a class="dropdown-item" href="{% url 'account_logout' %}">Disconnect</a>
-                    </div>
+                    
                     {% else %}                      
-                       Visitor
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                       <a class="dropdown-item" href="{% url 'account_signup' %}">Sign up</a>  
-                       <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
-                      </div>
+                       <a class="btn btn-primary mr-4" href="{% url 'account_signup' %}">Sign up</a>  
+                       <a class="btn btn-primary" href="{% url 'account_login' %}">Login</a>                     
                     {% endif %}                                         
-                  </div>
+                
             </div>
         </nav>
 
