@@ -32,11 +32,12 @@
                     {{ user.email }}
                     </button>
                     
-                    <a href="{% url 'search:list_products' %}"><img src="{% static 'core/noun_Carrot_29691_cropped.png' %}" height=50px></a>  
+                    <a href="{% url 'search:list_products' %}"><img src="{% static 'core/noun_Carrot_29691_cropped.png' %}" height=50px title="Mes produits favoris"></a>
+                    <a href="{% url 'account_logout' %}"><img src="{% static 'core/disconnect.png' %}" height=40px  class="ml-4" title="Se déconnecter"></a> 
                                      
-                    <button class="btn btn-default ml-2">
+                    <!-- <button class="btn btn-default ml-2">
                     <a class="btn btn-default" href="{% url 'account_logout' %}">Disconnect</a>
-                    </button>
+                    </button> -->
                     
                     {% else %}                      
                        <a class="btn btn-primary mr-4" href="{% url 'account_signup' %}">Sign up</a>  
