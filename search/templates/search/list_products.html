@@ -4,6 +4,10 @@
 
 {% load static %}
 
+<div style="background-color: chocolate; padding: 10 20 10 20;opacity:0.85;" class="rounded">
+    <h1 style="-webkit-text-fill-color: white;">Vos produits favoris</h1>
+    </div>
+
 <div class="row first_row_window rounded">
 
     {% if full_list %}
@@ -11,7 +15,7 @@
     {% for product in full_list %}
 
     <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-            <div class="card card-inverse card-info">
+            <div class="card card-inverse card-info border-success">
                 <img class="card-img-top" src="{{ product.product_image }}">
                 <img  class="card-img-overlay" src="{% get_static_prefix %}core/{{ product.nutriscore }}.png" alt="" style="float: right; margin-top: -45px; margin-left: 195px;width: 90px;">
                 <div class="card-block">

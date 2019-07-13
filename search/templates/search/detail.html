@@ -2,7 +2,7 @@
 
 {% block first_row %}
 <div style="background-color: chocolate; padding: 10 20 10 20;opacity:0.85;" class="rounded">
-<h1 style="-webkit-text-fill-color: white;">Your selected food</h1>
+<h1 style="-webkit-text-fill-color: white;">Détails du produit</h1>
 </div>
 
   <div class="row first_row_window rounded">
@@ -34,7 +34,7 @@
 				</dd>
       </dl> 
       
-	  <a class="btn btn-warning" href="{% url 'search:swap' product.id %}" role="button">Swap</a>
+	  <a class="btn btn-warning" href="{% url 'search:swap' product.id %}" role="button">Substituer</a>
 	  <!-- /search/swap/{{product.id}}  -->
 
 		</div>

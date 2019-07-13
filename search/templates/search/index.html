@@ -38,14 +38,15 @@
             {% for product in res %}
 
             <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                <div class="card card-inverse card-info">
+                <div class="card card-inverse card-info border-dark">
                     <img class="card-img-top" src="{{ product.product_image }}">
                     <img  class="card-img-overlay" src="{% get_static_prefix %}core/{{ product.nutriscore }}.png" alt="" style="float: right; margin-top: -45px; margin-left: 195px;width: 90px;">
                     <div class="card-block">
                         <h5 class="card-title" style="height:50px;padding: 5 5 5 5;">{{ product.product_name }}</h5>
                     </div>
                     <div class="card-footer">                    
-                        <a href="/search/{{ product.id }}/" class="btn btn-info btn-sm" role="button">Détails</a>                  
+                        <a href="/search/{{ product.id }}/" class="btn btn-info btn-sm" role="button">Détails</a>
+                        <a href="{% url 'search:swap' product.id %}" class="btn btn-warning btn-sm" role="button">Substituer</a>                  
                     </div>                
                 </div>
              </div>
