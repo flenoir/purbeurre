@@ -29,11 +29,28 @@
 
         {% if res is not None %}
 
-            <div class="first_row_window rounded">
+            <div class="row first_row_window rounded">
 
-            {% for r in res %}
+            <!-- {% for r in res %}
             <li><a href="{{ r.id }}">{{ r.product_name }}</a></li>
-            {% endfor %}
+            {% endfor %} -->
+
+            {% for product in res %}
+
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card card-inverse card-info">
+                    <img class="card-img-top" src="{{ product.product_image }}">
+                    <img  class="card-img-overlay" src="{% get_static_prefix %}core/{{ product.nutriscore }}.png" alt="" style="float: right; margin-top: -45px; margin-left: 195px;width: 90px;">
+                    <div class="card-block">
+                        <h5 class="card-title" style="height:50px;">{{ product.product_name }}</h5>
+                    </div>
+                    <div class="card-footer">                    
+                        <a href="/search/{{ product.id }}/" class="btn btn-info btn-sm" role="button">Détails</a>                  
+                    </div>                
+                </div>
+             </div>
+
+             {% endfor %}
 
             </div>
 

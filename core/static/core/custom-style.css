@@ -7,17 +7,19 @@ body {
 .first_row_bg {
     background-image: url(kawin-harasai-k60JspcBwKE-unsplash.jpg);
     background-size: 100% auto;
-    height: 1000px;
+    height: auto;
     padding-top: 100px;
 }
 
 .first_row_window {
     background-color: aliceblue; 
     opacity: 0.95;
-    padding-top: 40px;
+    padding: 40px 20px 40px 20px;
+    margin-bottom: 20px;
+    /* padding-top: 40px;
     padding-left: 20px;
-    padding-right: 20px;
-    height: 800px;
+    padding-right: 20px; */
+    height: auto;
 }
 
 .connexion_row_windows {
