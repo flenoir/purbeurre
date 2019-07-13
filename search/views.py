@@ -114,7 +114,7 @@ def list_products(request):
 
     return render(request, 'search/list_products.html', context)
 
-@login_required
+# @login_required
 def add_substitute(request, product_id, subs_id):
 
     current_user = request.user
@@ -128,7 +128,7 @@ def add_substitute(request, product_id, subs_id):
 
     return render(request, 'search/list_products.html', context)
 
-@login_required
+# @login_required
 def get_substitutes(current_user):
     # redirect to substitute list of connected user
     substitutes_list = CustomUser.objects.filter(user_substitutes__isnull=False).filter(email=current_user)
