@@ -22,7 +22,8 @@
                     <h5 class="card-title" style="height:50px;padding: 5 5 5 5;">{{ product.product_name }}</h5>
                 </div>
                 <div class="card-footer">                    
-                    <a href="/search/{{ product.id }}/" class="btn btn-info btn-sm" role="button">Détails</a>                  
+                    <a href="/search/{{ product.id }}/" class="btn btn-info btn-sm" role="button">Détails</a>
+                    <a href="{% url 'search:remove' product.id %}" class="btn btn-danger btn-sm" role="button">Retirer</a>                 
                 </div>                
             </div>
     </div>

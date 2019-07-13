@@ -143,3 +143,15 @@ def get_substitutes(current_user):
         }
 
         return context
+
+def remove_substitute(request, product_id):
+    
+    current_user = request.user
+
+    user_to_associate = CustomUser.objects.get(email=current_user)
+    user_to_associate.user_substitutes.remove(product_id)
+
+    context = get_substitutes(current_user)
+
+    return render(request, 'search/list_products.html', context)
+
