@@ -12,7 +12,9 @@ django-crispy-forms = "*"
 psycopg2 = "*"
 stop-words = "*"
 django-allauth = "*"
-
+whitenoise = "*"
+dj-database-url = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
