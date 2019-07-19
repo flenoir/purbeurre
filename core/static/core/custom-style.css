@@ -58,3 +58,14 @@ body {
     height: 10vw;
     object-fit: cover;
 }
+
+.footer {
+    position: absolute;
+    /* bottom: 0; */
+    height: 60px;
+    width: 100%;
+    padding-top:20px;
+    background-color: #214761;
+    color: #FFFFFF;
+    margin: 0 auto;
+  }
