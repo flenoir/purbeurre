@@ -4,6 +4,8 @@ body {
     background-size: 100% auto; */
 }
 
+dt, dd { display: inline; }
+
 .first_row_bg {
     background-image: url(kawin-harasai-k60JspcBwKE-unsplash.jpg);
     background-size: 100% auto;
@@ -69,3 +71,8 @@ body {
     color: #FFFFFF;
     margin: 0 auto;
   }
+
+  .form-group {
+    margin:5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+ }
