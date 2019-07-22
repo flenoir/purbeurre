@@ -25,29 +25,63 @@
 				</h4>  {{ status }} <a href="#" class="alert-link"></a>
       </div>
       {% endif %}
-
-			<dl>
-				<dt>Product code :</dt>
-				<dd>{{ code }}</dd>
-				<dt>
-					Nutriscore :
-				</dt>
-				<dd>
-					{{ nutriscore }}
-				</dd>			
-				<dt>
-					Novagroup :
-				</dt>
-				<dd>
-					{{ nova_groups }}
-				</dd>
-				<dt>
-					Categories :
-				</dt>
-				<dd>
-					{{ categories }}
-				</dd>
-      </dl> 
+	  <dl>
+		<dt>Product code :</dt>
+		<dd>{{ code }}</dd>
+		<br>
+		<dt>
+			Nutriscore :
+		</dt>
+		<dd>
+			{{ nutriscore }}
+		</dd>
+		<br>			
+		<dt>
+			Novagroup :
+		</dt>
+		<dd>
+			{{ nova_groups }}
+		</dd>
+		<br>
+		<dt>
+			Categories :
+		</dt>
+		<dd>
+			{{ categories }}
+		</dd>
+		<br>
+		<br>
+		<dt>
+			Sel (pour 100gr) :
+		</dt>
+		<dd>
+			{{ salt_100g }} gr
+		</dd>
+		<br>
+		<dt>
+			Matières grasses / Lipides (pour 100gr) :
+		</dt>
+		<dd>
+			{{ fat_100g }} gr
+		</dd>
+		<br>
+		<dt>
+			Graisses saturées (pour 100gr) :
+		</dt>
+		<dd>
+			{{ saturated_fat_100g }} gr
+		</dd>
+		<br>
+		<dt>
+			Sucres (pour 100gr) :
+		</dt>
+		<dd>
+			{{ sugars_100g }} gr
+		</dd>
+		<br>				
+		</dl>
+	  
+	  
       
       <a class="btn btn-secondary" href="{% url 'search:add_substitute' id product.id %}" role="button">Ajouter aux Substitus</a>
 	
