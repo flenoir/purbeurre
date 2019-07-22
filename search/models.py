@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
 class Product(models.Model):
 
     def __str__(self):
@@ -18,7 +19,7 @@ class Product(models.Model):
     product_image = models.CharField(max_length=100, null=True)
     nutriscore = models.CharField(max_length=1, null=True)
     stores = models.CharField(max_length=150, null=True)
-    quantity = models.CharField(max_length=40, null=True)    
+    quantity = models.CharField(max_length=40, null=True)
     nova_groups = models.CharField(max_length=5, null=True)
     categories = models.CharField(max_length=500, null=True)
     substitutes = models.ManyToManyField("self")

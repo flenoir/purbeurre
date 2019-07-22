@@ -15,6 +15,7 @@ django-allauth = "*"
 whitenoise = "*"
 dj-database-url = "*"
 gunicorn = "*"
+pep8 = "*"
 
 [requires]
 python_version = "3.6"

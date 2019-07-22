@@ -11,10 +11,8 @@ class TestModels(TestCase):
             nutriscore="a"
             )
 
-
     def test_Product_is_capitalized(self):
         self.assertEquals(self.product1.__str__(), "Test product")
 
-
-    def test_Product_is_created(self):        
+    def test_Product_is_created(self):
         self.assertEquals(Product.objects.all().count(), 1)
