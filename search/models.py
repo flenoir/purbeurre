@@ -23,6 +23,10 @@ class Product(models.Model):
     nova_groups = models.CharField(max_length=5, null=True)
     categories = models.CharField(max_length=500, null=True)
     substitutes = models.ManyToManyField("self")
+    fat_100g = models.CharField(max_length=20, null=True)
+    saturated_fat_100g = models.CharField(max_length=20, null=True)
+    sugars_100g = models.CharField(max_length=20, null=True)
+    salt_100g = models.CharField(max_length=20, null=True)
     # user_product = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     # @classmethod

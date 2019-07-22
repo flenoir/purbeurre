@@ -55,7 +55,18 @@ def words_filter(resulting_search):
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     print(product.product_image)
-    json_data = {'product': product, 'code': product.product_code, 'nova_groups': product.nova_groups, 'categories': product.categories, 'nutriscore': product.nutriscore.capitalize(), 'image': product.product_image}
+    json_data = {
+        'product': product,
+        'code': product.product_code,
+        'nova_groups': product.nova_groups,
+        'categories': product.categories,
+        'nutriscore': product.nutriscore.capitalize(),
+        'image': product.product_image,
+        'fat_100g': product.fat_100g,
+        'salt_100g': product.salt_100g,
+        'saturated_fat_100g': product.saturated_fat_100g,
+        'sugars_100g': product.sugars_100g,
+    }
     return render(request, 'search/detail.html', json_data)
 
 

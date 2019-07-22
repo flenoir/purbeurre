@@ -12,7 +12,7 @@ class Command(BaseCommand):
     
     def handle(self, *args, **options):
 
-        CATEGORIES_ARRAY = ['petit-dejeuners', 'plats-prepares', 'snacks-sales', 'biscuits-et-gateaux', 'snacks-sucres', 'produits-laitiers', 'epicerie', 'desserts', 'charcuteries', 'cereales-et-derives']
+        CATEGORIES_ARRAY = ['petit-dejeuners', 'plats-prepares', 'snacks-sales', 'biscuits-et-gateaux', 'snacks-sucres', 'produits-laitiers', 'epicerie', 'desserts', 'charcuteries', 'cereales-et-derives', 'produits-a-la-viande']
 
         for index, value in enumerate(CATEGORIES_ARRAY):
 
@@ -29,7 +29,7 @@ class Command(BaseCommand):
 
                 
                 try:
-                    x = Product(product_name=i['product_name_fr'].casefold(), brands=str(single_brand), description=i['generic_name_fr'].casefold(), product_url=i['url'] ,product_code=i['code'], product_image=i['image_front_url'] , nutriscore=i['nutrition_grades'], stores=i['stores_tags'], quantity=i['quantity'], nova_groups=i['nova_groups'], categories=i['categories'])
+                    x = Product(product_name=i['product_name_fr'].casefold(), brands=str(single_brand), description=i['generic_name_fr'].casefold(), product_url=i['url'] ,product_code=i['code'], product_image=i['image_front_url'] , nutriscore=i['nutrition_grades'], stores=i['stores_tags'], quantity=i['quantity'], nova_groups=i['nova_groups'], categories=i['categories'], fat_100g=i['nutriments']['fat_100g'], saturated_fat_100g=i['nutriments']['saturated-fat_100g'], sugars_100g=i['nutriments']['sugars_100g'], salt_100g=i['nutriments']['salt_100g']) 
                     x.save()
                     self.stdout.write(str(x.id))
                 except KeyError as e:
