@@ -8,6 +8,7 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'core/custom-style.css' %}" type="text/css">
+    <script src="{% static 'core/footer.js' %}"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #C45525">
@@ -52,6 +53,8 @@
         </nav>
 
 
+       
+
 
         <div class="container-fluid">
 
@@ -94,7 +97,7 @@
            
         </div>
 
-        <footer class="row footer">
+        <footer class="row footer" id="footer">
 
             <div class="col-md-6">
                     <p class="text-center">  <a href="{% url 'search:mentions' %}">Mentions légales</a></p> 

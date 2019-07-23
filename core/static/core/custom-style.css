@@ -62,7 +62,7 @@ dt, dd { display: inline; }
 }
 
 .footer {
-    position: absolute;
+    position: relative;
     /* bottom: 0; */
     height: 60px;
     width: 100%;
@@ -76,3 +76,5 @@ dt, dd { display: inline; }
     margin:5px 5px 5px 5px;
     padding: 10px 10px 10px 10px;
  }
+
+ 
