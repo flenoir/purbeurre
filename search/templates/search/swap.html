@@ -85,7 +85,7 @@
       {% if user.is_authenticated %}
 	  <a class="btn btn-secondary" href="{% url 'search:add_substitute' id product.id %}" role="button">Ajouter aux Substitus</a>
 	  {% else %}
-	  <a class="btn btn-secondary" href="{% url 'account_login' %}" role="button">Ajouter aux Substitus</a>
+	  <a class="btn btn-secondary" href="{% url 'account_login' %}?next={% url 'search:add_substitute' id product.id %}" role="button">Ajouter aux Substitus</a>
 	  {% endif %}
 	
 		</div>

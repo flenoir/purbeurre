@@ -25,8 +25,11 @@
                                        
                     </ul>
                  
-                </div>                
-                
+                </div>
+                <form method="post" class="form-inline my-2 my-lg-0">
+                    {% csrf_token%}
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">               
+                    
                     {% if user.is_authenticated %}
                     <button class="btn btn-secondary mr-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ user.email }}
@@ -42,12 +45,11 @@
                     {% else %}                      
                        <a class="btn btn-primary mr-4" href="{% url 'account_signup' %}">Sign up</a>  
                        <a class="btn btn-primary" href="{% url 'account_login' %}">Login</a>                     
-                    {% endif %}                                         
+                    {% endif %}
+                </form>                                      
                 
             </div>
         </nav>
-
-
 
 
 
