@@ -6,7 +6,7 @@
     <script src="https://kit.fontawesome.com/40c6803a98.js"></script>  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-    {% load static %}
+    {% load static %}    
     <link rel="stylesheet" href="{% static 'core/custom-style.css' %}" type="text/css">
     <script src="{% static 'core/footer.js' %}"></script>
 </head>
@@ -28,11 +28,9 @@
                  
                 </div>
                 <form method="post" class="form-inline my-2 my-lg-0">
-                    {% csrf_token%}
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">               
-                    
+                 
                     {% if user.is_authenticated %}
-                    <button class="btn btn-secondary mr-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary mr-2 ml-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ user.email }}
                     </button>
                     
@@ -44,8 +42,8 @@
                     </button> -->
                     
                     {% else %}                      
-                       <a class="btn btn-primary mr-4" href="{% url 'account_signup' %}">Sign up</a>  
-                       <a class="btn btn-primary" href="{% url 'account_login' %}">Login</a>                     
+                       <a class="btn btn-primary mr-4" href="{% url 'account_signup' %}">S'enregistrer</a>  
+                       <a class="btn btn-primary" href="{% url 'account_login' %}">Connexion</a>                     
                     {% endif %}
                 </form>                                      
                 
