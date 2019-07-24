@@ -18,8 +18,7 @@ def index(request):
         # form object instanciation with data  from requested object
         form = SearchForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data["post"]
-
+            data = form.cleaned_data["post"].casefold()
             stop_words = get_stop_words("fr")
             splited_search = data.split(" ")
             resulting_search = list(set(splited_search) - set(stop_words))
