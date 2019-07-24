@@ -54,15 +54,21 @@
         </div>
     </div>
 
+
     {% endfor %}
 
     {% else %}
+
+    {% if request.method == 'POST' %}
+
     <div class="row first_row_window rounded">
 
         <div class="col-8 mt-4">
             <h4>Pas de produits trouvé !</h4>
         </div>
     </div>
+
+    {% endif %}
 
     {% endif %}
 </div>
