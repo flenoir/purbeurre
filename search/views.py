@@ -26,7 +26,7 @@ def index(request):
             db_res = words_filter(resulting_search)
             res = [i for i in db_res]
 
-            print(res)
+            print(res, len(res))
             context = {"form": form, "res": res}
             return render(request, "search/index.html", context)
 

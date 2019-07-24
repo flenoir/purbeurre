@@ -5,141 +5,160 @@
 
 
 
-    {% block first_row %}
+{% block first_row %}
 
-        <div style="background-color: #345A61; padding: 40 40 20 40; opacity: 0.80;" class="rounded">
+<div style="background-color: #345A61; padding: 40 40 20 40; opacity: 0.80;" class="rounded">
 
-        {% if user.is_authenticated %}
-        <h1 style="color:white">Du gras oui, mais de qualité !</h1>
-        <h3 style="color:white">{{user.email}}, trouvez un produit de substitution pour ceux que vous consommez tous les jours</h3> 
-        {% else %}
-        <h1 style="color:white">Du gras oui, mais de qualité !</h1>
-        <h3 style="color:white">Cher(e) visiteur(euse), trouvez un produit de substitution pour ceux que vous consommez tous les jours </h3> 
-        {% endif %}
+    {% if user.is_authenticated %}
+    <h1 style="color:white">Du gras oui, mais de qualité !</h1>
+    <h3 style="color:white">{{user.email}}, trouvez un produit de substitution pour ceux que vous consommez tous les
+        jours</h3>
+    {% else %}
+    <h1 style="color:white">Du gras oui, mais de qualité !</h1>
+    <h3 style="color:white">Cher(e) visiteur(euse), trouvez un produit de substitution pour ceux que vous consommez tous
+        les jours </h3>
+    {% endif %}
 
-        </div>
+</div>
 
 
-                
-        <form method="post" class="form-inline justify-content-center search_container rounded" style="margin-top: 80px" novalidate>
-            {% csrf_token%}
-            {{ form|crispy }}
-            <button class= "btn btn-primary ml-4" type="submit">Chercher</button>
-        </form>
-        
 
-        {% if res is not None %}
+<form method="post" class="form-inline justify-content-center search_container rounded" style="margin-top: 80px"
+    novalidate>
+    {% csrf_token%}
+    {{ form|crispy }}
+    <button class="btn btn-primary ml-4" type="submit">Chercher</button>
+</form>
 
-            <div class="row first_row_window rounded">
 
-            <!-- {% for r in res %}
-            <li><a href="{{ r.id }}">{{ r.product_name }}</a></li>
-            {% endfor %} -->
+{% if res %}
 
-            {% for product in res %}
+<div class="row first_row_window rounded">
 
-            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                <div class="card card-inverse card-info border-dark">
-                    <img class="card-img-top" src="{{ product.product_image }}">
-                    <img  class="card-img-overlay" src="{% get_static_prefix %}core/{{ product.nutriscore }}.png" alt="" style="float: right; margin-top: -45px; margin-left: 195px;width: 90px;">
-                    <div class="card-block">
-                        <h5 class="card-title" style="height:50px;padding: 5 5 5 5;">{{ product.product_name|truncatechars:40 }}</h5>
-                    </div>
-                    <div class="card-footer">                    
-                        <a href="/search/{{ product.id }}/" class="btn btn-info btn-sm" role="button">Détails</a>
-                        <a href="{% url 'search:swap' product.id %}" class="btn btn-warning btn-sm" role="button">Substituer</a>                  
-                    </div>                
-                </div>
-             </div>
 
-             {% endfor %}
+    {% for product in res %}
 
+    <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+        <div class="card card-inverse card-info border-dark">
+            <img class="card-img-top" src="{{ product.product_image }}">
+            <img class="card-img-overlay" src="{% get_static_prefix %}core/{{ product.nutriscore }}.png" alt=""
+                style="float: right; margin-top: -45px; margin-left: 195px;width: 90px;">
+            <div class="card-block">
+                <h5 class="card-title" style="height:50px;padding: 5 5 5 5;">{{ product.product_name|truncatechars:40 }}
+                </h5>
             </div>
+            <div class="card-footer">
+                <a href="/search/{{ product.id }}/" class="btn btn-info btn-sm" role="button">Détails</a>
+                <a href="{% url 'search:swap' product.id %}" class="btn btn-warning btn-sm" role="button">Substituer</a>
+            </div>
+        </div>
+    </div>
 
-        {% endif %}
+    {% endfor %}
 
-        
-    
-    {% endblock %}
+    {% else %}
+    <div class="row first_row_window rounded">
+
+        <div class="col-8 mt-4">
+            <h4>Pas de produits trouvé !</h4>
+        </div>
+    </div>
+
+    {% endif %}
+</div>
 
 
-    {% block second_row %}
 
-    <div class="container-fluid" style="padding-left:40px;padding-right:40px;">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2 class="text-center" style="margin-top:40px;">
-                        Colette & Remy
-                    </h2>
-                    <h3 class="text-center">------</h3>
-                    <h3 class="bold">De la ratatouille aux croissants</h3>
-                    <p>                    
-                    Pur Beurre est l'initiative de deux amoureux de la gastronomie française, Colette Tatou et Rémy, que vous avez déjà certainement rencontrés dans notre excellent restaurant Ratatouille. 
+{% endblock %}
+
+
+{% block second_row %}
+
+<div class="container-fluid" style="padding-left:40px;padding-right:40px;">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center" style="margin-top:40px;">
+                Colette & Remy
+            </h2>
+            <h3 class="text-center">------</h3>
+            <h3 class="bold">De la ratatouille aux croissants</h3>
+            <p>
+                Pur Beurre est l'initiative de deux amoureux de la gastronomie française, Colette Tatou et Rémy, que
+                vous avez déjà certainement rencontrés dans notre excellent restaurant Ratatouille.
+                <br>
+                </br>
+                <em>
+                    <strong>Colette Tatou :</strong>"Nous aimons tous manger, surtout en France ! Personnellement, une
+                    baguette fraîche, du bon fromage de chèvre et un bon vin rouge me suffisent amplement. Comme tout le
+                    monde, je fais mes courses au supermarché. Mais petit à petit je me suis rendue compte, surtout
+                    lorsque nous avons ouvert le restaurant, que je pouvais remplacer les produits aseptisés que j'avais
+                    l'habitude d'acheter par de bons produits du terroir Et souvent pour le même prix !"
                     <br>
                     </br>
-                    <em>
-                    <strong>Colette Tatou :</strong>"Nous aimons tous manger, surtout en France ! Personnellement, une baguette fraîche, du bon fromage de chèvre et un bon vin rouge me suffisent amplement. Comme tout le monde, je fais mes courses au supermarché. Mais petit à petit je me suis rendue compte, surtout lorsque nous avons ouvert le restaurant, que je pouvais remplacer les produits aseptisés que j'avais l'habitude d'acheter par de bons produits du terroir Et souvent pour le même prix !"
-                    <br>
-                    </br>
-                    <strong>Remy :</strong> "Pour ma part je me rendais déjà dans bien des magasins car j'aime beaucoup me balader, surtout dans les caves et les cuisines. Je connaissais par coeur le contenu des boutiques bio (dont je raffole) ainsi que les ingrédients de tous les aliments vendus. Lorsque Colette m'a demandé si elle pouvait remplacer son Nutella matinal par un aliment plus sain, je savais tout de suite où le trouver. L'idée de Pur Beurre était née !"
-                    </em>
+                    <strong>Remy :</strong> "Pour ma part je me rendais déjà dans bien des magasins car j'aime beaucoup
+                    me balader, surtout dans les caves et les cuisines. Je connaissais par coeur le contenu des
+                    boutiques bio (dont je raffole) ainsi que les ingrédients de tous les aliments vendus. Lorsque
+                    Colette m'a demandé si elle pouvait remplacer son Nutella matinal par un aliment plus sain, je
+                    savais tout de suite où le trouver. L'idée de Pur Beurre était née !"
+                </em>
             </p>
-                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <img alt="Ratatouille" src="{% static 'core/ratatouille-portrait.jpg' %}"
+                style="height: 280px;margin-top: 200px;" class="float-right" />
+        </div>
+        <div class="col-md-6">
+            <img alt="Colette" src="{% static 'core/colette-tatou-full.png' %}" />
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block third_row %}
+
+<div class="container-fluid" style="padding:40 40 40 40;">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center" style="color:white">
+                Contactez-nous
+            </h3>
+            <p class="text-center" style="color:white">
+                Nous sommes à votre disposition si vous avez la mondre question !
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row justify-content-center" style="margin-top:20">
+                <span style="font-size: 3em; color: white;">
+                    <i class="fas fa-phone-alt"></i>
+                </span>
             </div>
-            <div class="row">
-                <div class="col-md-6">                    
-                    <img alt="Ratatouille" src="{% static 'core/ratatouille-portrait.jpg' %}" style="height: 280px;margin-top: 200px;" class="float-right"/>
-                </div>
-                <div class="col-md-6">
-                    <img alt="Colette" src="{% static 'core/colette-tatou-full.png' %}" />
-                </div>
-                
+            <div class="row justify-content-center">
+                <h4 style="color:white;margin-top:10">
+                    06 05 04 03 02
+                </h4>
             </div>
         </div>
 
-    {% endblock %}
-
-
-    {% block third_row %}
-
-    <div class="container-fluid" style="padding:40 40 40 40;">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="text-center" style="color:white">
-                        Contactez-nous
-                    </h3>
-                    <p class="text-center" style="color:white">
-                        Nous sommes à votre disposition si vous avez la mondre question !
-                    </p>
-                </div>
+        <div class="col-md-6">
+            <div class="row justify-content-center" style="margin-top:20">
+                <span style="font-size: 3em; color: white;">
+                    <i class="far fa-envelope"></i>
+                </span>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row justify-content-center" style="margin-top:20">                   
-                        <span style="font-size: 3em; color: white;">
-                            <i class="fas fa-phone-alt"></i> 
-                        </span>
-                    </div>
-                    <div class="row justify-content-center">                 
-                        <h4 style="color:white;margin-top:10">
-                            06 05 04 03 02
-                        </h4>
-                    </div>
-                </div>                
-            
-                <div class="col-md-6">
-                    <div class="row justify-content-center" style="margin-top:20">                  
-                        <span style="font-size: 3em; color: white;">
-                            <i class="far fa-envelope"></i>
-                        </span>
-                    </div>
-                    <div class="row justify-content-center">                 
-                        <h4 style="color:white;margin-top:10">
-                            contact@purbeurre.com
-                        </h4>
-                    </div>                
-                </div>
-            </div>            
+            <div class="row justify-content-center">
+                <h4 style="color:white;margin-top:10">
+                    contact@purbeurre.com
+                </h4>
+            </div>
         </div>
+    </div>
+</div>
 
-    {% endblock %}
+{% endblock %}

@@ -23,7 +23,15 @@ class Command(BaseCommand):
             "desserts",
             "charcuteries",
             "cereales-et-derives",
-            "produits-a-la-viande",
+            "viandes",
+            "aliments-et-boissons-a-base-de-vegetaux",
+            "aliments-a-base-de-fruits-et-de-legumes",
+            "produits-de-la-mer",
+            "conserves",
+            "pates-alimentaires",
+            "aliments-d-origine-vegetale",
+            "cereales-et-pommes-de-terre",
+            "produits-a-tartiner",
         ]
 
         for index, value in enumerate(CATEGORIES_ARRAY):

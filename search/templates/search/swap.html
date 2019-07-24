@@ -3,96 +3,99 @@
 {% block first_row %}
 
 <div style="background-color: cadetblue; padding: 10 20 10 20;opacity:0.85;" class="rounded">
-		<h1 style="-webkit-text-fill-color: white;">Proposition de substitut</h1>
-		</div>
+	<h1 style="-webkit-text-fill-color: white;">Proposition de substitut</h1>
+</div>
 
 <div class="row first_row_window rounded">
-		<div class="col-md-8">
-			<h3>
-				{{ product }}
-      </h3>
-      
-      <p style="display:none">{{ product.id  }}</p>
+	<div class="col-md-8">
+		<h3>
+			{{ product }}
+		</h3>
 
-      {%  if  status != "" %}
-			<div class="alert alert-danger alert-dismissable">
-				 
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-					×
-				</button>
-				<h4>
-					Alerte Produit !
-				</h4>  {{ status }} <a href="#" class="alert-link"></a>
-      </div>
-      {% endif %}
-	  <dl>
-		<dt>Product code :</dt>
-		<dd>{{ code }}</dd>
-		<br>
-		<dt>
-			Nutriscore :
-		</dt>
-		<dd>
-			{{ nutriscore }}
-		</dd>
-		<br>			
-		<dt>
-			Novagroup :
-		</dt>
-		<dd>
-			{{ nova_groups }}
-		</dd>
-		<br>
-		<dt>
-			Categories :
-		</dt>
-		<dd>
-			{{ categories }}
-		</dd>
-		<br>
-		<br>
-		<dt>
-			Sel (pour 100gr) :
-		</dt>
-		<dd>
-			{{ salt_100g }} gr
-		</dd>
-		<br>
-		<dt>
-			Matières grasses / Lipides (pour 100gr) :
-		</dt>
-		<dd>
-			{{ fat_100g }} gr
-		</dd>
-		<br>
-		<dt>
-			Graisses saturées (pour 100gr) :
-		</dt>
-		<dd>
-			{{ saturated_fat_100g }} gr
-		</dd>
-		<br>
-		<dt>
-			Sucres (pour 100gr) :
-		</dt>
-		<dd>
-			{{ sugars_100g }} gr
-		</dd>
-		<br>				
+		<p style="display:none">{{ product.id  }}</p>
+
+		{%  if  status != "" %}
+		<div class="alert alert-danger alert-dismissable">
+
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+				×
+			</button>
+			<h4>
+				Alerte Produit !
+			</h4> {{ status }} <a href="#" class="alert-link"></a>
+		</div>
+		{% endif %}
+		<dl>
+			<dt>Product code :</dt>
+			<dd>{{ code }}</dd>
+			<br>
+			<dt>
+				Nutriscore :
+			</dt>
+			<dd>
+				{{ nutriscore }}
+			</dd>
+			<br>
+			<dt>
+				Novagroup :
+			</dt>
+			<dd>
+				{{ nova_groups }}
+			</dd>
+			<br>
+			<dt>
+				Categories :
+			</dt>
+			<dd>
+				{{ categories }}
+			</dd>
+			<br>
+			<br>
+			<dt>
+				Sel (pour 100gr) :
+			</dt>
+			<dd>
+				{{ salt_100g }} gr
+			</dd>
+			<br>
+			<dt>
+				Matières grasses / Lipides (pour 100gr) :
+			</dt>
+			<dd>
+				{{ fat_100g }} gr
+			</dd>
+			<br>
+			<dt>
+				Graisses saturées (pour 100gr) :
+			</dt>
+			<dd>
+				{{ saturated_fat_100g }} gr
+			</dd>
+			<br>
+			<dt>
+				Sucres (pour 100gr) :
+			</dt>
+			<dd>
+				{{ sugars_100g }} gr
+			</dd>
+			<br>
 		</dl>
-	  
-	  
-      {% if user.is_authenticated %}
-	  <a class="btn btn-secondary" href="{% url 'search:add_substitute' id product.id %}" role="button">Ajouter aux Substitus</a>
-	  {% else %}
-	  <a class="btn btn-secondary" href="{% url 'account_login' %}?next={% url 'search:add_substitute' id product.id %}" role="button">Ajouter aux Substitus</a>
-	  {% endif %}
-	
-		</div>
-		<div class="col-md-4 ml 4">
-			<img alt="{{ product }}" src="{{ image }}" class="img-fluid rounded" />
-		</div>
+
+
+		{% if user.is_authenticated %}
+		<a class="btn btn-secondary" href="{% url 'search:add_substitute' id product.id %}" role="button">Ajouter aux
+			Favoris</a>
+		{% else %}
+		<a class="btn btn-secondary"
+			href="{% url 'account_login' %}?next={% url 'search:add_substitute' id product.id %}" role="button">Ajouter
+			aux Favoris</a>
+		{% endif %}
+
 	</div>
+	<div class="col-md-4 ml 4">
+		<img alt="{{ product }}" src="{{ image }}" class="img-fluid rounded" />
+	</div>
+</div>
 
 
 
