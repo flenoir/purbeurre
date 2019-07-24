@@ -94,7 +94,7 @@ def swap(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     splited = product.categories.split(",")
-    #trick to avoid products with less than 3 categories
+    # trick to avoid products with less than 3 categories
     if len(splited) < 3:
         splited.append(" x")
 
@@ -121,6 +121,10 @@ def swap(request, product_id):
             "categories": substitute.categories,
             "nutriscore": substitute.nutriscore.capitalize(),
             "image": substitute.product_image,
+            "fat_100g": product.fat_100g,
+            "salt_100g": product.salt_100g,
+            "saturated_fat_100g": product.saturated_fat_100g,
+            "sugars_100g": product.sugars_100g,
             "status": "Pas de meilleur produit trouvé !",
             "id": product_id,
         }
@@ -136,6 +140,10 @@ def swap(request, product_id):
             "categories": substitute.categories,
             "nutriscore": substitute.nutriscore.capitalize(),
             "image": substitute.product_image,
+            "fat_100g": product.fat_100g,
+            "salt_100g": product.salt_100g,
+            "saturated_fat_100g": product.saturated_fat_100g,
+            "sugars_100g": product.sugars_100g,
             "status": "",
             "id": product_id,
         }
