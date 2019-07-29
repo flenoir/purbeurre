@@ -7,7 +7,8 @@ from search.search_form import SearchForm
 
 def home(request):
     form = SearchForm()
-    return render(request, "search/index.html", {"form": form})
+    # return render(request, "search/index.html", {"form": form})
+    return redirect("search/")
 
 
 def signup(request):
@@ -15,7 +16,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("home")
+            return redirect("search/")
     else:
         form = UserCreationForm()
 
