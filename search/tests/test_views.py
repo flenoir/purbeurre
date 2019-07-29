@@ -66,13 +66,11 @@ class ListProductsPageTestCase(TestCase):
 
 
 
-# test that list_products is only available to connecter user
-
 class WordsFilter_TestCase(TestCase):
     # test that words filter returns the filtered products
     def setUp(self):
         self.product1 = Product.objects.create(product_name="filet saumon brocolis frites", nutriscore="a", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
-        self.product2 = Product.objects.create(product_name="filet saumon brocolis", nutriscore="a", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
+        self.product2 = Product.objects.create(product_name="filet saumon navet", nutriscore="a", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
 
 
     def test_resulting_search(self):
@@ -80,7 +78,7 @@ class WordsFilter_TestCase(TestCase):
         self.assertEquals(self.words, ['filet', 'saumon', 'brocolis', 'frites'])
 
 
-
-    # def test_words_filtering(self):
-    #     resulting_search = 
-    #     result = Product.objects.filter(product_name__contains=resulting_search[0]).filter(product_name__contains=resulting_search[1]).filter(product_name__contains=resulting_search[2])
+    def test_words_filtering(self):
+        resulting_search = ['filet', 'saumon', 'frites']
+        result = Product.objects.filter(product_name__contains=resulting_search[0]).filter(product_name__contains=resulting_search[1]).filter(product_name__contains=resulting_search[2])
+        self.assertEquals(result[0], self.product1)
