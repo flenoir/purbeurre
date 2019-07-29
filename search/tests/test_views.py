@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from search.models import Product
-from search.views import get_substitutes
+from search.views import get_substitutes, compare_products
 from django.shortcuts import get_object_or_404
 from core.models import CustomUser
 
@@ -82,3 +82,42 @@ class WordsFilter_TestCase(TestCase):
         resulting_search = ['filet', 'saumon', 'frites']
         result = Product.objects.filter(product_name__contains=resulting_search[0]).filter(product_name__contains=resulting_search[1]).filter(product_name__contains=resulting_search[2])
         self.assertEquals(result[0], self.product1)
+
+
+
+class Compare_Products_TestCase(TestCase):
+    # Setup variable
+    def setUp(self):
+        self.product1 = Product.objects.create(product_name="filet saumon brocolis frites", nutriscore="a", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
+        self.product2 = Product.objects.create(product_name="filet saumon navet", nutriscore="d", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
+
+    # test compare products
+    def test_compare_products(self):
+        compared = compare_products(self.product1, self.product2)
+        self.assertEquals(compared, (self.product1, 3))
+
+
+class Get_Substitutes_TestCase(TestCase):
+    # Setup variable
+    def setUp(self):
+        self.product1 = Product.objects.create(product_name="filet saumon brocolis frites", nutriscore="a", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
+        self.user1 = CustomUser.objects.create(email="toto@gmail.com", password='12345')
+        self.user_to_associate = CustomUser.objects.get(email=self.user1.email)
+        self.user_to_associate.user_substitutes.add(self.product1.id)
+
+    # test substitute list is filled 
+    def test_get_substitute_exists(self):
+        self.client.login(email="toto@gmail.com", password='12345')
+        getsubs = get_substitutes(self.user1)
+        self.assertEquals(getsubs['full_list'][0], self.product1)
+
+    # test substitiute_list returns None when empty
+    def test_get_substitute_returns_none(self):
+        self.client.login(email="toto@gmail.com", password='12345')
+        substitutes_list = CustomUser.objects.filter(user_substitutes__isnull=True).filter(email=self.user1.email)
+        self.assertFalse(substitutes_list)
+
+
+
+# test add substitute
+# test remove substitute
