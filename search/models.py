@@ -27,12 +27,3 @@ class Product(models.Model):
     saturated_fat_100g = models.CharField(max_length=20, null=True)
     sugars_100g = models.CharField(max_length=20, null=True)
     salt_100g = models.CharField(max_length=20, null=True)
-    # user_product = models.ManyToManyField(settings.AUTH_USER_MODEL)
-
-    # @classmethod
-    # def associate(cls, current_product_id, substitute_product):
-    #     subs_product = cls.objects.get(id=current_product_id)
-    #     subs_product.substitutes.add(substitute_product)
-
-    def associate(self, substitute_product):
-        self.substitutes.add(substitute_product)
