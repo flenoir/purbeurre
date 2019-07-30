@@ -139,11 +139,14 @@ class Remove_Substitutes_TestCase(TestCase):
         self.product1 = Product.objects.create(product_name="filet saumon brocolis frites", nutriscore="a", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
         self.product2 = Product.objects.create(product_name="filet saumon navet", nutriscore="d", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
         self.user = CustomUser.objects.create(email="toto@gmail.com", password='12345')
+        self.user.set_password('12345')
+        self.user.save()
 
     # test remove substitute returns 200
     def test_remove_substitutes_returns_200(self):
         self.client.login(email="toto@gmail.com", password='12345')
-        removesubs = remove_substitute(self, self.product2)        
+        removesubs = self.client.get(reverse('search:remove', args=(self.product2.id,)))
+        # removesubs = remove_substitute(self, self.product2)        
         self.assertEquals(removesubs.status_code, 200)
 
 

@@ -206,7 +206,7 @@ def get_substitutes(current_user):
         return context
 
 
-@login_required
+# @login_required
 def remove_substitute(request, product_id):
 
     current_user = request.user
