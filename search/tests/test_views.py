@@ -1,11 +1,10 @@
 from django.test import TestCase
 from django.urls import reverse
 from search.models import Product
-from search.views import get_substitutes, compare_products
+from search.views import get_substitutes, add_substitute, remove_substitute, list_products, compare_products
 from django.shortcuts import get_object_or_404
 from core.models import CustomUser
 
-# Create your tests here.
 
 class IndexPageTestCase(TestCase):
     # test that index page returns 200
@@ -38,7 +37,7 @@ class SwapPageTestCase(TestCase):
     # Setup variable
     def setUp(self):
         self.product = Product.objects.create(product_name="test_product", nutriscore="a", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
-        self.product_id = Product.objects.get(product_name="test_product").id        
+        self.product_id = Product.objects.get(product_name="test_product").id    
 
     # test that Swap page returns 200
     def test_swap_page(self):
@@ -61,8 +60,9 @@ class ListProductsPageTestCase(TestCase):
     def test_listProducts_page(self):
         # log user to comply with @login_required decorator
         self.client.login(email="toto@gmail.com", password='12345')
-        response = self.client.get(reverse('search:list_products'))
-        self.assertEquals(response.status_code, 200)
+        listprod = list_products(self)
+        # response = self.client.get(reverse('search:list_products'))
+        self.assertEquals(listprod.status_code, 200)
 
 
 
@@ -94,7 +94,7 @@ class Compare_Products_TestCase(TestCase):
     # test compare products
     def test_compare_products(self):
         compared = compare_products(self.product1, self.product2)
-        self.assertEquals(compared, (self.product1, 3))
+        self.assertEquals(compared, (self.product1, 5))
 
 
 class Get_Substitutes_TestCase(TestCase):
@@ -111,13 +111,40 @@ class Get_Substitutes_TestCase(TestCase):
         getsubs = get_substitutes(self.user1)
         self.assertEquals(getsubs['full_list'][0], self.product1)
 
-    # test substitiute_list returns None when empty
+    # test substitute_list returns None when empty
     def test_get_substitute_returns_none(self):
         self.client.login(email="toto@gmail.com", password='12345')
         substitutes_list = CustomUser.objects.filter(user_substitutes__isnull=True).filter(email=self.user1.email)
         self.assertFalse(substitutes_list)
 
 
+class Add_Substitutes_TestCase(TestCase):
+    # Setup variable
+    def setUp(self):
+        self.product1 = Product.objects.create(product_name="filet saumon brocolis frites", nutriscore="a", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
+        self.product2 = Product.objects.create(product_name="filet saumon navet", nutriscore="d", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
+        self.user = CustomUser.objects.create(email="toto@gmail.com", password='12345')
 
-# test add substitute
-# test remove substitute
+    # test add substitute returns 200
+    def test_add_substitute_to_user_returns_200(self):
+        self.client.login(email="toto@gmail.com", password='12345')
+        addsubs = add_substitute(self, self.product2.id, self.product1.id)
+        self.assertEquals(addsubs.status_code, 200)
+
+
+class Remove_Substitutes_TestCase(TestCase):
+
+    # Setup variable
+    def setUp(self):
+        self.product1 = Product.objects.create(product_name="filet saumon brocolis frites", nutriscore="a", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
+        self.product2 = Product.objects.create(product_name="filet saumon navet", nutriscore="d", categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf")
+        self.user = CustomUser.objects.create(email="toto@gmail.com", password='12345')
+
+    # test remove substitute returns 200
+    def test_remove_substitutes_returns_200(self):
+        self.client.login(email="toto@gmail.com", password='12345')
+        removesubs = remove_substitute(self, self.product2)        
+        self.assertEquals(removesubs.status_code, 200)
+
+
+
