@@ -7,9 +7,15 @@ from core.models import CustomUser
 
 
 class IndexPageTestCase(TestCase):
-    # test that index page returns 200
+
+    # test that get on index page returns 200
     def test_index_page(self):
         response = self.client.get(reverse('search:index'))
+        self.assertEquals(response.status_code, 200)
+
+    # test that post on index page returns 200
+    def test_index_post(self):
+        response = self.client.post(reverse('search:index'), kwargs={'post': 'poulet aux brocolis'})
         self.assertEquals(response.status_code, 200)
 
 
@@ -17,12 +23,12 @@ class DetailPageTestCase(TestCase):
     # Setup variable
     def setUp(self):
         self.product = Product.objects.create(product_name="test_product", nutriscore="a")
-        self.product_id = Product.objects.get(product_name="test_product").id 
+        # self.product_id = Product.objects.get(product_name="test_product").id 
 
 
-    # test that DetailPage returns 200
+    # test that DetailPage returns 200 None
     def test_detail_page(self):        
-        response = self.client.get(reverse('search:detail', args=(self.product_id,)))
+        response = self.client.get(reverse('search:detail', args=(self.product.id,)))
         self.assertEqual(response.status_code, 200)
 
 
