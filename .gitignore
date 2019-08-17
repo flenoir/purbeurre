@@ -7,3 +7,6 @@ core/migrations/__pycache__/
 search/management/__pycache__/
 search/management/commands/__pycache__/
 search/dumps
+purbeurre/settings/production.py
+__pycache__
+purbeurre/old_settings.py
