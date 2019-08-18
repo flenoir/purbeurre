@@ -7,6 +7,11 @@ branches:
   only:
     - staging
 
+services:
+  - postgresql
+
+env: DJANGO_SETTINGS_MODULE=purbeurre.settings.travis
+
 install:
   - make init
 script:
