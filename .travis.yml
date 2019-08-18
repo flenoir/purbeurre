@@ -8,10 +8,9 @@ branches:
     - staging
 
 before_script:
-  # - pip install -r requirements.txt
   - 'pip install pipenv'
-  - 'cd /home/flenoir/purbeurre'
   - 'pipenv install'
+  - 'pipenv shell'
 
 services:
   - postgresql
@@ -19,4 +18,4 @@ services:
 env: DJANGO_SETTINGS_MODULE=purbeurre.settings.travis
 
 script:
-  - sudo pipenv run python manage.py test
+  - sudo python manage.py test
