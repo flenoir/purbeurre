@@ -1,22 +1,20 @@
 language: python
+language: python
 python:
   - '3.6.7'
-
-before_script:
-  - pip install -r requirements.txt
-  - psql -c 'create database purbeurre_db;' -U postgres
-
-env: DJANGO_SETTINGS_MODULE="purbeurre.settings"
-  global:
-  - PGPORT=5433
-
-services:
-  - postgresql
-
-script:
-  - ./manage.py test
 
 # safelist
 branches:
   only:
     - staging
+
+before_script:
+  - pip install -r requirements.txt
+
+services:
+  - postgresql
+
+env: DJANGO_SETTINGS_MODULE=purbeurre.settings.travis
+
+script:
+  - ./manage.py test
