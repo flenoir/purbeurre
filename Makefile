@@ -12,4 +12,4 @@ init:
 
 test:
 	@echo 'Run all tests'
-	pipenv run python manage.py test
+	pipenv run python manage.py test --settings=purbeurre.settings.travis
