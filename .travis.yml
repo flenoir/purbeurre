@@ -1,5 +1,4 @@
 language: python
-language: python
 python:
   - '3.6.7'
 
@@ -11,6 +10,7 @@ branches:
 before_script:
   # - pip install -r requirements.txt
   - 'pip install pipenv'
+  - 'cd /home/flenoir/purbeurre'
   - 'pipenv install'
 
 services:
