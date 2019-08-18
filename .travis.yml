@@ -12,13 +12,6 @@ services:
 
 env: DJANGO_SETTINGS_MODULE=purbeurre.settings.travis
 
-before_install:
-  - sudo service postgresql stop
-  - sed -e 's/^port.*/port = 5433/' /etc/postgresql/10/main/postgresql.conf > postgresql.conf
-  - sudo chown postgres postgresql.conf
-  - sudo mv postgresql.conf /etc/postgresql/10/main
-  - sudo service postgresql start 10
-
 install:
   - 'pip install pipenv'
   - 'pipenv install'
