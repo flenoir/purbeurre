@@ -17,4 +17,4 @@ services:
 env: DJANGO_SETTINGS_MODULE=purbeurre.settings.travis
 
 script:
-  - ./manage.py test
+  - sudo python manage.py test
