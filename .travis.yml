@@ -18,6 +18,8 @@ before_install:
   - sudo chown postgres postgresql.conf
   - sudo mv postgresql.conf /etc/postgresql/10/main
   - sudo service postgresql start 10
+  - sudo service postgresql status
+  - sudo netstat -plunt |grep postgres
 
 install:
   - make init
