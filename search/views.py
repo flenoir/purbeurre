@@ -62,9 +62,11 @@ def words_filter(resulting_search):
         return result
 
 
-def detail(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    print(product.product_image)
+def detail(request, product_code):
+    # product = get_object_or_404(Product, pk=product_code)
+    # print(product_code)
+    product = Product.objects.get(product_code=product_code)
+    # print(prod.product_image)
     json_data = {
         "product": product,
         "code": product.product_code,
@@ -78,13 +80,14 @@ def detail(request, product_id):
         "sugars_100g": product.sugars_100g,
     }
     return render(request, "search/detail.html", json_data)
+    # return render(request, "search/detail.html")
 
 
 def mentions(request):
     return render(request, "search/mentions_legales.html")
 
 
-def swap(request, product_id):
+def swap(request, product_code):
     """
     get categories form request
     search database for products matching all categories
@@ -92,7 +95,7 @@ def swap(request, product_id):
     display food product
     """
 
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(Product, pk=product_code)
     splited = product.categories.split(",")
     # trick to avoid products with less than 3 categories
     if len(splited) < 3:
@@ -126,7 +129,7 @@ def swap(request, product_id):
             "saturated_fat_100g": product.saturated_fat_100g,
             "sugars_100g": product.sugars_100g,
             "status": "Pas de meilleur produit trouvé !",
-            "id": product_id,
+            "id": product_code,
         }
     else:
         substitute = arr[randrange(len(arr))][
@@ -145,7 +148,7 @@ def swap(request, product_id):
             "saturated_fat_100g": product.saturated_fat_100g,
             "sugars_100g": product.sugars_100g,
             "status": "",
-            "id": product_id,
+            "id": product_code,
         }
 
     return render(request, "search/swap.html", json_data)
@@ -161,7 +164,7 @@ def compare_products(x, y):
 
     if better < original:
         # print("better product")
-        return x, x.id
+        return x, x.product_code
 
 
 @login_required
@@ -174,12 +177,12 @@ def list_products(request):
 
 
 # @login_required
-def add_substitute(request, product_id, subs_id):
+def add_substitute(request, product_code, subs_id):
 
     current_user = request.user
 
     # add current substitute to current_user using fk relation
-    product_to_associate = Product.objects.get(id=product_id)  # to delete
+    # product_to_associate = Product.objects.get(id=product_code)  # to delete
     user_to_associate = CustomUser.objects.get(email=current_user)
     user_to_associate.user_substitutes.add(subs_id)
 
@@ -207,12 +210,12 @@ def get_substitutes(current_user):
 
 
 # @login_required
-def remove_substitute(request, product_id):
+def remove_substitute(request, product_code):
 
     current_user = request.user
 
     user_to_associate = CustomUser.objects.get(email=current_user)
-    user_to_associate.user_substitutes.remove(product_id)
+    user_to_associate.user_substitutes.remove(product_code)
 
     context = get_substitutes(current_user)
 

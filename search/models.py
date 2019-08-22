@@ -15,7 +15,7 @@ class Product(models.Model):
     brands = models.CharField(max_length=100, null=True)
     description = models.CharField(max_length=200, null=True)
     product_url = models.CharField(max_length=150, null=True)
-    product_code = models.CharField(max_length=20, null=True)
+    product_code = models.BigIntegerField(null=False, primary_key=True)
     product_image = models.CharField(max_length=100, null=True)
     nutriscore = models.CharField(max_length=1, null=True)
     stores = models.CharField(max_length=150, null=True)
@@ -27,3 +27,4 @@ class Product(models.Model):
     saturated_fat_100g = models.CharField(max_length=20, null=True)
     sugars_100g = models.CharField(max_length=20, null=True)
     salt_100g = models.CharField(max_length=20, null=True)
+    

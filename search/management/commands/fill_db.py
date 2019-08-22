@@ -70,7 +70,7 @@ class Command(BaseCommand):
                         salt_100g=i["nutriments"]["salt_100g"],
                     )
                     x.save()
-                    self.stdout.write(str(x.id))
+                    self.stdout.write(str(x.product_code))
                 except KeyError as e:
                     print(e)
                     self.stdout.write(str(e))

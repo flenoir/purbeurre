@@ -6,12 +6,12 @@ from . import views
 app_name = "search"
 urlpatterns = [
     path("", views.index, name="index"),
-    path("<int:product_id>/", views.detail, name="detail"),
-    path("swap/<int:product_id>/", views.swap, name="swap"),
-    path("remove/<int:product_id>/", views.remove_substitute, name="remove"),
+    path("<int:product_code>/", views.detail, name="detail"),
+    path("swap/<int:product_code>/", views.swap, name="swap"),
+    path("remove/<int:product_code>/", views.remove_substitute, name="remove"),
     path("list_products/", views.list_products, name="list_products"),
     path(
-        "add_substitute/<int:product_id>/<int:subs_id>/",
+        "add_substitute/<int:product_code>/<int:subs_id>/",
         views.add_substitute,
         name="add_substitute",
     ),

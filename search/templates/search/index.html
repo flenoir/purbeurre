@@ -48,8 +48,8 @@
                 </h5>
             </div>
             <div class="card-footer">
-                <a href="/search/{{ product.id }}/" class="btn btn-info btn-sm" role="button">Détails</a>
-                <a href="{% url 'search:swap' product.id %}" class="btn btn-warning btn-sm" role="button">Substituer</a>
+                <a href="/search/{{ product.product_code }}/" class="btn btn-info btn-sm" role="button">Détails</a>
+                <a href="{% url 'search:swap' product.product_code %}" class="btn btn-warning btn-sm" role="button">Substituer</a>
             </div>
         </div>
     </div>
