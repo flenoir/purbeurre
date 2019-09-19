@@ -31,13 +31,13 @@ class DetailPageTestCase(TestCase):
     # Setup variable
     def setUp(self):
         self.product = Product.objects.create(
-            product_name="test_product", nutriscore="a"
+            product_name="test_product", nutriscore="a",product_code=7840022838378488
         )
         # self.product_id = Product.objects.get(product_name="test_product").id
 
     # test that DetailPage returns 200 None
     def test_detail_page(self):
-        response = self.client.get(reverse("search:detail", args=(self.product.id,)))
+        response = self.client.get(reverse("search:detail", args=(self.product.product_code,)))
         self.assertEqual(response.status_code, 200)
 
 
@@ -54,9 +54,10 @@ class SwapPageTestCase(TestCase):
         self.product = Product.objects.create(
             product_name="test_product",
             nutriscore="a",
+            product_code=7840022838378488,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
-        self.product_id = Product.objects.get(product_name="test_product").id
+        self.product_id = Product.objects.get(product_name="test_product").product_code
 
     # test that Swap page returns 200
     def test_swap_page(self):
@@ -70,14 +71,16 @@ class ListProductsPageTestCase(TestCase):
         self.product = Product.objects.create(
             product_name="test_product",
             nutriscore="a",
+            product_code=7840022838378488,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
         self.substitute = Product.objects.create(
             product_name="test_product2",
             nutriscore="a",
+            product_code=40022838378488765,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
-        self.product_id = Product.objects.get(product_name="test_product").id
+        self.product_id = Product.objects.get(product_name="test_product").product_code
         self.user = CustomUser.objects.create(email="toto@gmail.com", username="toto")
         self.user.set_password("12345")
         self.user.save()
@@ -98,11 +101,13 @@ class WordsFilter_TestCase(TestCase):
         self.product1 = Product.objects.create(
             product_name="filet saumon brocolis frites",
             nutriscore="a",
+            product_code=378293020882773,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
         self.product2 = Product.objects.create(
             product_name="filet saumon navet",
             nutriscore="a",
+            product_code=78293020992773,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
 
@@ -128,18 +133,20 @@ class Compare_Products_TestCase(TestCase):
         self.product1 = Product.objects.create(
             product_name="filet saumon brocolis frites",
             nutriscore="a",
+            product_code=378293020882773,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
         self.product2 = Product.objects.create(
             product_name="filet saumon navet",
             nutriscore="d",
+            product_code=3782968900065,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
 
     # test compare products
     def test_compare_products(self):
         compared = compare_products(self.product1, self.product2)
-        self.assertEquals(compared, (self.product1, 7))
+        self.assertEquals(compared, (self.product1, 378293020882773))
 
 
 class Get_Substitutes_TestCase(TestCase):
@@ -148,11 +155,12 @@ class Get_Substitutes_TestCase(TestCase):
         self.product1 = Product.objects.create(
             product_name="filet saumon brocolis frites",
             nutriscore="a",
+            product_code=37829302088999,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
         self.user1 = CustomUser.objects.create(email="toto@gmail.com", password="12345")
         self.user_to_associate = CustomUser.objects.get(email=self.user1.email)
-        self.user_to_associate.user_substitutes.add(self.product1.id)
+        self.user_to_associate.user_substitutes.add(self.product1.product_code)
 
     # test substitute list is filled
     def test_get_substitute_exists(self):
@@ -175,11 +183,13 @@ class Add_Substitutes_TestCase(TestCase):
         self.product1 = Product.objects.create(
             product_name="filet saumon brocolis frites",
             nutriscore="a",
+            product_code=378293020882773,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
         self.product2 = Product.objects.create(
             product_name="filet saumon navet",
             nutriscore="d",
+            product_code=57296820882789,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
         self.user = CustomUser.objects.create(email="toto@gmail.com", password="12345")
@@ -187,7 +197,7 @@ class Add_Substitutes_TestCase(TestCase):
     # test add substitute returns 200
     def test_add_substitute_to_user_returns_200(self):
         self.client.login(email="toto@gmail.com", password="12345")
-        addsubs = add_substitute(self, self.product2.id, self.product1.id)
+        addsubs = add_substitute(self, self.product2.product_code, self.product1.product_code)
         self.assertEquals(addsubs.status_code, 200)
 
 
@@ -198,11 +208,13 @@ class Remove_Substitutes_TestCase(TestCase):
         self.product1 = Product.objects.create(
             product_name="filet saumon brocolis frites",
             nutriscore="a",
+            product_code=378293020882773,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
         self.product2 = Product.objects.create(
             product_name="filet saumon navet",
             nutriscore="d",
+            product_code=57296820882789,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
         self.user = CustomUser.objects.create(email="toto@gmail.com", password="12345")
@@ -212,7 +224,7 @@ class Remove_Substitutes_TestCase(TestCase):
     # test remove substitute returns 200
     def test_remove_substitutes_returns_200(self):
         self.client.login(email="toto@gmail.com", password="12345")
-        removesubs = self.client.get(reverse("search:remove", args=(self.product2.id,)))
+        removesubs = self.client.get(reverse("search:remove", args=(self.product2.product_code,)))
         # removesubs = remove_substitute(self, self.product2)
         self.assertEquals(removesubs.status_code, 200)
 
