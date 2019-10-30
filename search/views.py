@@ -1,37 +1,56 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
-from search.search_form import SearchForm
 from django.contrib.auth.decorators import login_required
-from stop_words import get_stop_words
+from django.core.paginator import Paginator
 from django.db.models import Q
 from random import randrange
+from stop_words import get_stop_words
+from search.search_form import SearchForm
 
 from .models import Product
 from core.models import CustomUser
 
 # Create your views here.
 
+def valid_form(form, request):
+    """
+    check if form is valid
+    clean datas and paginate
+    """
+    if form.is_valid():
+        data = form.cleaned_data["post"].casefold()
+        stop_words = get_stop_words("fr")
+        splited_search = data.split(" ")
+        resulting_search = list(set(splited_search) - set(stop_words))
+
+        db_res = words_filter(resulting_search)
+        paginator = Paginator(db_res, 12)
+        page = request.GET.get('page')
+        contacts = paginator.get_page(page)
+        # res = [i for i in db_res]
+        return contacts
+
 
 def index(request):
     if request.method == "POST":
-        print("post")
         # form object instanciation with data  from requested object
         form = SearchForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data["post"].casefold()
-            stop_words = get_stop_words("fr")
-            splited_search = data.split(" ")
-            resulting_search = list(set(splited_search) - set(stop_words))
+        request.session['search-products-post'] = request.POST
+        contacts = valid_form(form, request)
 
-            db_res = words_filter(resulting_search)
-            res = [i for i in db_res]
+        context = {"form": form, "res": contacts}
+        return render(request, "search/index.html", context)
 
-            print(res, len(res))
-            context = {"form": form, "res": res}
-            return render(request, "search/index.html", context)
-
-    form = SearchForm()
-    return render(request, "search/index.html", {"form": form})
+    # else implicite       
+    if 'search-products-post' in request.session:
+        request.POST = request.session['search-products-post']
+        request.method == "POST"
+        form = SearchForm(request.POST)
+        contacts = valid_form(form, request)
+    
+        form = SearchForm()
+        context = {"form": form, "res": contacts}
+        return render(request, "search/index.html", context)
 
 
 def words_filter(resulting_search):
@@ -132,9 +151,8 @@ def swap(request, product_code):
             "id": product_code,
         }
     else:
-        substitute = arr[randrange(len(arr))][
-            0
-        ]  # select substitute randomly among all better products
+        # select substitute randomly among all better products
+        substitute = arr[randrange(len(arr))][0] 
         # print(substitute.product_code)
         json_data = {
             "product": substitute,
@@ -161,9 +179,9 @@ def compare_products(x, y):
     # if x location's index in abc is lower than y location's index then...
     better = abc.index(x.nutriscore)
     original = abc.index(y.nutriscore)
+    print(original , better)
 
     if better < original:
-        # print("better product")
         return x, x.product_code
 
 
