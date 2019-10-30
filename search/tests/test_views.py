@@ -17,6 +17,7 @@ class IndexPageTestCase(TestCase):
     # test that get on index page returns 200
     def test_index_page(self):
         response = self.client.get(reverse("search:index"))
+        print(response.status_code)
         self.assertEquals(response.status_code, 200)
 
     # test that post on index page returns 200

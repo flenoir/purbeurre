@@ -51,6 +51,11 @@ def index(request):
         form = SearchForm()
         context = {"form": form, "res": contacts}
         return render(request, "search/index.html", context)
+    
+    else:
+        form = SearchForm()
+        context = {"form": form}
+        return render(request, "search/index.html", context)
 
 
 def words_filter(resulting_search):
