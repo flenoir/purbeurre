@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from search.search_form import SearchForm
+from django.views.generic.edit import FormView
 
 # Create your views here.
 
@@ -11,13 +12,6 @@ def home(request):
     return redirect("search/")
 
 
-def signup(request):
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("search/")
-    else:
-        form = UserCreationForm()
-
-    return render(request, "account/signup.html", {"form": form})
+class SignupView(FormView):
+    form_class = UserCreationForm
+    template_name = "account/signup.html"
