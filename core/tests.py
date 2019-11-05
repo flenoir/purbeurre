@@ -13,6 +13,7 @@ class SignupPageTestCase(TestCase):
         response = self.client.get(reverse("signup"))
         self.assertEquals(response.status_code, 200)
 
+    #  s'enregistrer et verifier que l'utilisateur est bien enregistré
 
 class LoginPageTestCase(TestCase):
     def setUp(self):

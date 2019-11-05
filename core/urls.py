@@ -2,7 +2,7 @@ from django.urls import path, include
 
 from .views import SignupView
 
-
+app_name = "core"
 urlpatterns = [
-    path('', SignupView.as_view(), name='signup'),
+    path('signup/', SignupView.as_view(), name='signup'),
 ]
