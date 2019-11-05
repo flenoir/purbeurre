@@ -15,8 +15,8 @@ from core.models import CustomUser
 def index(request):
     if request.method == "POST":
         print("post")
-        # form object instanciation with data  from requested object
-        form = SearchForm(request.POST)
+    else:        
+        form = SearchForm(request.GET)        
         if form.is_valid():
             data = form.cleaned_data["post"].casefold()
             stop_words = get_stop_words("fr")
@@ -25,13 +25,10 @@ def index(request):
 
             db_res = words_filter(resulting_search)
             res = [i for i in db_res]
-
-            print(res, len(res))
             context = {"form": form, "res": res}
             return render(request, "search/index.html", context)
-
-    form = SearchForm()
-    return render(request, "search/index.html", {"form": form})
+        form = SearchForm()
+        return render(request, "search/index.html", {"form": form})
 
 
 def words_filter(resulting_search):

@@ -23,7 +23,7 @@
 
 
 
-<form method="post" class="form-inline justify-content-center search_container rounded" style="margin-top: 80px"
+<form method="get" class="form-inline justify-content-center search_container rounded" style="margin-top: 80px"
     novalidate>
     {% csrf_token%}
     {{ form|crispy }}
