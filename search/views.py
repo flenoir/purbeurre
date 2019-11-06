@@ -17,20 +17,21 @@ def index(request):
     if request.method == "POST":
         print("post")
     else:        
-        form = SearchForm(request.GET)        
+        form = SearchForm(request.GET)  
         if form.is_valid():
             data = form.cleaned_data["post"].casefold()
             stop_words = get_stop_words("fr")
             splited_search = data.split(" ")
             resulting_search = list(set(splited_search) - set(stop_words))
 
-            db_res = words_filter(resulting_search)
-            pagination_res = Paginator(db_res, 12)
+            db_res = words_filter(resulting_search)            
+            paginator = Paginator(db_res, 12)
             page = request.GET.get('page')
-            res = pagination_res.get_page(page)
-            print(page, res)
+            print("page is", paginator.page(2))
+            result = paginator.get_page(page)
+            print(result)
             # res = [i for i in db_res]
-            context = {"form": form, "res": res}
+            context = {"form": form, "res": result}
             return render(request, "search/index.html", context)
         else:
             print("not valid")
@@ -42,7 +43,7 @@ def words_filter(resulting_search):
     """ filter the number of words in search with AND """
 
     if len(resulting_search) < 2:
-        result = Product.objects.filter(product_name__contains=resulting_search[0])
+        result = Product.objects.filter(product_name__contains=resulting_search[0]).order_by('product_code')
         return result
     elif len(resulting_search) < 3:
         result = Product.objects.filter(

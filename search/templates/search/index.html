@@ -85,7 +85,7 @@
             </span>
     
             {% if res.has_next %}
-                <a href="?page={{ res.next_page_number }}">suivante</a>
+                <a href="?csrfmiddlewaretoken={{ request.GET.csrfmiddlewaretoken }}&post={{ request.GET.post }}&page={{ res.next_page_number }}">suivante</a>
                 <a href="?page={{ res.paginator.num_pages }}">dernière &raquo;</a>
             {% endif %}
         </span>
