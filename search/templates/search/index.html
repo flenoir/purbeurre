@@ -76,8 +76,8 @@
     <div class="pagination">
         <span class="step-links">
             {% if res.has_previous %}
-                <a href="?page=1">&laquo; première</a>
-                <a href="?page={{ res.previous_page_number }}">précedente</a>
+                <a href="?csrfmiddlewaretoken={{ request.GET.csrfmiddlewaretoken }}&post={{ request.GET.post }}&page=1">&laquo; première</a>
+                <a href="?csrfmiddlewaretoken={{ request.GET.csrfmiddlewaretoken }}&post={{ request.GET.post }}&page={{ res.previous_page_number }}">précedente</a>
             {% endif %}
     
             <span class="current">
@@ -86,7 +86,7 @@
     
             {% if res.has_next %}
                 <a href="?csrfmiddlewaretoken={{ request.GET.csrfmiddlewaretoken }}&post={{ request.GET.post }}&page={{ res.next_page_number }}">suivante</a>
-                <a href="?page={{ res.paginator.num_pages }}">dernière &raquo;</a>
+                <a href="?csrfmiddlewaretoken={{ request.GET.csrfmiddlewaretoken }}&post={{ request.GET.post }}&page={{ res.paginator.num_pages }}">dernière &raquo;</a>
             {% endif %}
         </span>
     </div>
