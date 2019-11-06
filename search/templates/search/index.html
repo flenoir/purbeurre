@@ -71,6 +71,27 @@
     {% endif %}
 
     {% endif %}
+
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if res.has_previous %}
+                <a href="?page=1">&laquo; première</a>
+                <a href="?page={{ res.previous_page_number }}">précedente</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ res.number }} sur {{ res.paginator.num_pages }}.
+            </span>
+    
+            {% if res.has_next %}
+                <a href="?page={{ res.next_page_number }}">suivante</a>
+                <a href="?page={{ res.paginator.num_pages }}">dernière &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    
+
 </div>
 
 

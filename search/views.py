@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from search.search_form import SearchForm
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from stop_words import get_stop_words
 from django.db.models import Q
 from random import randrange
@@ -24,11 +25,17 @@ def index(request):
             resulting_search = list(set(splited_search) - set(stop_words))
 
             db_res = words_filter(resulting_search)
-            res = [i for i in db_res]
+            pagination_res = Paginator(db_res, 12)
+            page = request.GET.get('page')
+            res = pagination_res.get_page(page)
+            print(page, res)
+            # res = [i for i in db_res]
             context = {"form": form, "res": res}
             return render(request, "search/index.html", context)
-        form = SearchForm()
-        return render(request, "search/index.html", {"form": form})
+        else:
+            print("not valid")
+            form = SearchForm()
+            return render(request, "search/index.html", {"form": form})
 
 
 def words_filter(resulting_search):
