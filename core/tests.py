@@ -7,13 +7,22 @@ from core.models import CustomUser
 
 
 class SignupPageTestCase(TestCase):
-
+    def setUp(self):
+        self.user = CustomUser.objects.create(email="toto@gmail.com", username="toto")
+        self.user.set_password("12345")
+        self.user.save()
+    
     # test that get on signup page returns 200
     def test_Signup_page(self):
         response = self.client.get(reverse("core:signup"))
         self.assertEquals(response.status_code, 200)
 
-    #  s'enregistrer et verifier que l'utilisateur est bien enregistré
+    # test user has been created
+    def test_User_Has_Been_Created(self):
+        dbrequest = CustomUser.objects.all().count()
+        self.assertEquals(dbrequest, 1)
+
+
 
 class LoginPageTestCase(TestCase):
     def setUp(self):
@@ -34,10 +43,7 @@ class LoginPageTestCase(TestCase):
         )
         self.assertEquals(response.status_code, 200)
 
-    # test user has been created
-    def test_User_Has_Been_Created(self):
-        dbrequest = CustomUser.objects.all().count()
-        self.assertEquals(dbrequest, 1)
+    
 
 
 class logoutPageTestCase(TestCase):

@@ -72,6 +72,7 @@
 
     {% endif %}
 
+    
 
     <div class="pagination">
         <span class="step-links">
@@ -80,9 +81,11 @@
                 <a href="?csrfmiddlewaretoken={{ request.GET.csrfmiddlewaretoken }}&post={{ request.GET.post }}&page={{ res.previous_page_number }}">précedente</a>
             {% endif %}
     
+            {% if res.number %}
             <span class="current">
                 Page {{ res.number }} sur {{ res.paginator.num_pages }}.
             </span>
+            {% endif %}
     
             {% if res.has_next %}
                 <a href="?csrfmiddlewaretoken={{ request.GET.csrfmiddlewaretoken }}&post={{ request.GET.post }}&page={{ res.next_page_number }}">suivante</a>
@@ -90,6 +93,8 @@
             {% endif %}
         </span>
     </div>
+
+   
     
 
 </div>
