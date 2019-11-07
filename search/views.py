@@ -26,15 +26,12 @@ def index(request):
 
             db_res = words_filter(resulting_search)            
             paginator = Paginator(db_res, 12)
-            page = request.GET.get('page')
-            print("page is", paginator.page(2))
-            result = paginator.get_page(page)
-            print(result)
+            page = request.GET.get('page')            
+            result = paginator.get_page(page)            
             # res = [i for i in db_res]
             context = {"form": form, "res": result}
             return render(request, "search/index.html", context)
-        else:
-            print("not valid")
+        else:            
             form = SearchForm()
             return render(request, "search/index.html", {"form": form})
 

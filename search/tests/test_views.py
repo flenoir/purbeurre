@@ -20,9 +20,9 @@ class IndexPageTestCase(TestCase):
         self.assertEquals(response.status_code, 200)
 
     # test that post on index page returns 200
-    def test_index_post(self):
-        response = self.client.post(
-            reverse("search:index"), kwargs={"post": "poulet aux brocolis"}
+    def test_index_get(self):
+        response = self.client.get(
+            reverse("search:index"), kwargs={"get": "poulet aux brocolis"}
         )
         self.assertEquals(response.status_code, 200)
 
@@ -228,3 +228,102 @@ class Remove_Substitutes_TestCase(TestCase):
         # removesubs = remove_substitute(self, self.product2)
         self.assertEquals(removesubs.status_code, 200)
 
+
+class PaginationTestCase(TestCase):
+
+        # Setup variable
+    def setUp(self):
+        self.product1 = Product.objects.create(
+            product_name="filet saumon brocolis frites",
+            nutriscore="a",
+            product_code=378293020882771,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product2 = Product.objects.create(
+            product_name="filet saumon navet",
+            nutriscore="d",
+            product_code=57296820882782,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product3 = Product.objects.create(
+            product_name="filet saumon haricots",
+            nutriscore="a",
+            product_code=378293020882773,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product4 = Product.objects.create(
+            product_name="filet saumon pmme de terre",
+            nutriscore="d",
+            product_code=57296820882784,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product5 = Product.objects.create(
+            product_name="filet saumon chou",
+            nutriscore="a",
+            product_code=378293020882775,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product6 = Product.objects.create(
+            product_name="filet pulet frites",
+            nutriscore="d",
+            product_code=57296820882786,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product7 = Product.objects.create(
+            product_name="filet poulet tomate",
+            nutriscore="a",
+            product_code=378293020882777,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product8 = Product.objects.create(
+            product_name="filet dinde champignons",
+            nutriscore="d",
+            product_code=57296820882788,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product9 = Product.objects.create(
+            product_name="filet dinde navet",
+            nutriscore="a",
+            product_code=378293020882779,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product10 = Product.objects.create(
+            product_name="filet saumon tomates",
+            nutriscore="d",
+            product_code=57296820882710,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product11 = Product.objects.create(
+            product_name="filet saumon creme",
+            nutriscore="a",
+            product_code=378293020882711,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product12 = Product.objects.create(
+            product_name="filet poulet creme champignons",
+            nutriscore="d",
+            product_code=57296820882712,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product13 = Product.objects.create(
+            product_name="filet poulet miel",
+            nutriscore="a",
+            product_code=378293020882713,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+        self.product14 = Product.objects.create(
+            product_name="filet poulet pommes",
+            nutriscore="d",
+            product_code=57296820882714,
+            categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
+        )
+
+    # test that page are more than one if search retunr more than 12 products
+    def test_index_pagination(self):
+        response =self.client.get(
+            reverse("search:index"), {"post": "filet"}
+        )
+        # print(response.context['res'])
+        self.assertEquals(str(response.context['res']),'<Page 1 of 2>')
+        
+        

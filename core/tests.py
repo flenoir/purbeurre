@@ -10,7 +10,7 @@ class SignupPageTestCase(TestCase):
 
     # test that get on signup page returns 200
     def test_Signup_page(self):
-        response = self.client.get(reverse("signup"))
+        response = self.client.get(reverse("core:signup"))
         self.assertEquals(response.status_code, 200)
 
     #  s'enregistrer et verifier que l'utilisateur est bien enregistré
