@@ -66,7 +66,25 @@
 				</dd>
 				<br>				
       </dl> 
-      
+	  
+	  <div class="btn-group" role="group" aria-label="Basic example">
+		{% for store in stores %}
+		<!-- <button type="button" class="btn btn-secondary">{{ store }}</button> -->
+		<button type="button" class="btn btn-secondary" href="https://www.google.com/maps/search/{{ store }}/@43.6184794,3.8551742,12z/data=!3m1!4b1" 
+			target="popup" 
+			onclick='window.open("https://www.google.com/maps/search/{{ store }}/@43.6184794,3.8551742,12z/data=!3m1!4b1","popup","width=1200,height=800"); return false;'>
+			{{ store }}
+		  </button>
+        {% endfor %}
+	  </div>
+
+	  <!-- <a href="https://www.google.com/maps/search/carrefour+market/@43.6184794,3.8551742,12z/data=!3m1!4b1" 
+  target="popup" 
+  onclick='window.open("https://www.google.com/maps/search/carrefour+market/@43.6184794,3.8551742,12z/data=!3m1!4b1","popup","width=600,height=600"); return false;'>
+    Open Link in Popup
+</a> -->
+
+
 	  <a class="btn btn-warning" href="{% url 'search:swap' code %}" role="button">Substituer</a>
 	  <!-- /search/swap/{{product.id}}  -->
 

@@ -69,11 +69,13 @@ def detail(request, product_code):
     # print(product_code)
     product = Product.objects.get(product_code=product_code)
     # print(prod.product_image)
+    splited_stores = product.stores.split(",")
     json_data = {
         "product": product,
         "code": product.product_code,
         "nova_groups": product.nova_groups,
         "categories": product.categories,
+        "stores": splited_stores,
         "nutriscore": product.nutriscore.capitalize(),
         "image": product.product_image,
         "fat_100g": product.fat_100g,
