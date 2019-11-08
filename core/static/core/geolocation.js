@@ -7,6 +7,8 @@
       };
 
       console.log(pos);
+      // $('#coordinates').innerHTML(pos)
+      $("#coordinates").text(pos);
       
     //   geocoder.geocode( { 'location': pos}, function(results, status, infowindow) {
     //   if (status == 'OK') {

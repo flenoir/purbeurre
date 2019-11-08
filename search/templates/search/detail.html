@@ -64,30 +64,34 @@
 				<dd>
 					{{ sugars_100g }} gr
 				</dd>
+				<br>
+				<dt>
+					Disponible dans les magasins :
+				</dt>
 				<br>				
-      </dl> 
+	  </dl> 
 	  
-	  <div class="btn-group" role="group" aria-label="Basic example">
+	  {% if stores %}
+	  
+	  <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 20px;">
 		{% for store in stores %}
 		<!-- <button type="button" class="btn btn-secondary">{{ store }}</button> -->
-		<button type="button" class="btn btn-secondary" href="https://www.google.com/maps/search/{{ store }}/@43.6184794,3.8551742,12z/data=!3m1!4b1" 
+		<button type="button" class="btn btn-outline-primary" href="https://www.google.com/maps/search/{{ store }}/@43.6184794,3.8551742,12z/data=!3m1!4b1" 
 			target="popup" 
 			onclick='window.open("https://www.google.com/maps/search/{{ store }}/@43.6184794,3.8551742,12z/data=!3m1!4b1","popup","width=1200,height=800"); return false;'>
 			{{ store }}
 		  </button>
-        {% endfor %}
+		{% endfor %}
 	  </div>
 
-	  <!-- <a href="https://www.google.com/maps/search/carrefour+market/@43.6184794,3.8551742,12z/data=!3m1!4b1" 
-  target="popup" 
-  onclick='window.open("https://www.google.com/maps/search/carrefour+market/@43.6184794,3.8551742,12z/data=!3m1!4b1","popup","width=600,height=600"); return false;'>
-    Open Link in Popup
-</a> -->
+	  {% endif %}
 
-
+	  <!-- <h2 id="coordinates">coordinates</h2> -->
+	  
+<div>
 	  <a class="btn btn-warning" href="{% url 'search:swap' code %}" role="button">Substituer</a>
 	  <!-- /search/swap/{{product.id}}  -->
-
+</div>
 		</div>
 		<div class="col-md-4 ml 4">
 			<img alt="{{ product }}" src="{{ image }}" class="img-fluid rounded" />
