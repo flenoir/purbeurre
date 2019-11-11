@@ -5,10 +5,14 @@
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
+      var lat = document.getElementById('latitude');
+      var lon = document.getElementById('longitude');
+      lat.value = position.coords.latitude;
+      lon.value = position.coords.longitude;
+
 
       console.log(pos);
-      // $('#coordinates').innerHTML(pos)
-      $("#coordinates").text(pos);
+   
       
     //   geocoder.geocode( { 'location': pos}, function(results, status, infowindow) {
     //   if (status == 'OK') {

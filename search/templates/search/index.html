@@ -27,9 +27,11 @@
     novalidate>
     {% csrf_token%}
     {{ form|crispy }}
+    <input id="latitude" name="latitude" type="text" class="" style="display: none;"></input>
+    <input id="longitude" name="longitude" type="text" class="" style="display: none;"></input>
+
     <button class="btn btn-primary ml-4" type="submit">Chercher</button>
 </form>
-
 
 {% if res %}
 

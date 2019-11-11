@@ -17,11 +17,13 @@ def index(request):
     if request.method == "POST":
         print("post")
     else:        
-        form = SearchForm(request.GET)  
+        form = SearchForm(request.GET)
+        request.session['latitude'] = request.GET.get('latitude')
+        request.session['longitude'] = request.GET.get('longitude')
         if form.is_valid():
             data = form.cleaned_data["post"].casefold()
             stop_words = get_stop_words("fr")
-            splited_search = data.split(" ")
+            splited_search = data.split(" ")            
             resulting_search = list(set(splited_search) - set(stop_words))
 
             db_res = words_filter(resulting_search)            
@@ -66,9 +68,7 @@ def words_filter(resulting_search):
 
 def detail(request, product_code):
     # product = get_object_or_404(Product, pk=product_code)
-    # print(product_code)
     product = Product.objects.get(product_code=product_code)
-    # print(prod.product_image)
     splited_stores = product.stores.split(",")
     json_data = {
         "product": product,
@@ -84,7 +84,6 @@ def detail(request, product_code):
         "sugars_100g": product.sugars_100g,
     }
     return render(request, "search/detail.html", json_data)
-    # return render(request, "search/detail.html")
 
 
 def mentions(request):
