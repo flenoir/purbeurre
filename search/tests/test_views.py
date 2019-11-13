@@ -324,6 +324,6 @@ class PaginationTestCase(TestCase):
             reverse("search:index"), {"post": "filet"}
         )
         # print(response.context['res'])
-        self.assertEquals(str(response.context['res']),'<Page 1 of 2>')
+        self.assertEquals(response.context['res'].next_page_number(), 2)
         
         

@@ -70,23 +70,27 @@
 				</dt>
 				<br>				
 	  </dl> 
-	  
+
 	  {% if stores %}
 	  
 	  <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 20px;">
 		{% for store in stores %}
-		<!-- <button type="button" class="btn btn-secondary">{{ store }}</button> -->
-		<button type="button" class="btn btn-outline-primary" href="https://www.google.com/maps/search/{{ store }}/@{{ request.session.latitude }},{{ request.session.longitude }},12z/data=!3m1!4b1" 
+		
+		<button type="button" class="btn btn-outline-primary" id="poplink" href="#" 
 			target="popup" 
-			onclick='window.open("https://www.google.com/maps/search/{{ store }}/@{{ request.session.latitude }},{{ request.session.longitude }},12z/data=!3m1!4b1","popup","width=1200,height=800"); return false;'>
+			onclick='
+			var lat = sessionStorage.getItem("lat");
+		  	var lon = sessionStorage.getItem("lon");
+			window.open("https://www.google.com/maps/search/{{ store }}/@"+lat+","+lon+",12z/data=!3m1!4b1","popup","width=1200,height=800"); return false;'>
 			{{ store }}
-		  </button>
+		</button>
+
 		{% endfor %}
 	  </div>
 
 	  {% endif %}
 
-	  <!-- <h3>{{ request.session.latitude }}</h3> <h3>{{ request.session.longitude }}</h3> -->
+	  
 
 <div>
 	  <a class="btn btn-warning" href="{% url 'search:swap' code %}" role="button">Substituer</a>
