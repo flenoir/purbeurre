@@ -16,6 +16,7 @@ from core.models import CustomUser
 def index(request):
     if request.method == "POST":
         print("post")
+        return render(request, "search/index.html")
     else:        
         form = SearchForm(request.GET)
         request.session['latitude'] = request.GET.get('latitude')

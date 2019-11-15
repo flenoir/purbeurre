@@ -14,12 +14,12 @@ from core.models import CustomUser
 
 class IndexPageTestCase(TestCase):
 
-    # test that get on index page returns 200
+    # test that post on index page returns 200
     def test_index_page(self):
-        response = self.client.get(reverse("search:index"))
+        response = self.client.post(reverse("search:index"), kwargs={"post": "poulet aux brocolis"})
         self.assertEquals(response.status_code, 200)
 
-    # test that post on index page returns 200
+    # test that get on index page returns 200
     def test_index_get(self):
         response = self.client.get(
             reverse("search:index"), kwargs={"get": "poulet aux brocolis"}
@@ -31,7 +31,7 @@ class DetailPageTestCase(TestCase):
     # Setup variable
     def setUp(self):
         self.product = Product.objects.create(
-            product_name="test_product", nutriscore="a",product_code=7840022838378488
+            product_name="test_product", nutriscore="a",product_code=7840022838378488, stores="auchan, leclerc, super U"
         )
         # self.product_id = Product.objects.get(product_name="test_product").id
 
@@ -39,6 +39,13 @@ class DetailPageTestCase(TestCase):
     def test_detail_page(self):
         response = self.client.get(reverse("search:detail", args=(self.product.product_code,)))
         self.assertEqual(response.status_code, 200)
+
+    # test that DetailPage displays stores
+    def test_display_store(self):
+        response = self.client.get(reverse("search:detail", args=(self.product.product_code,)))
+        # print(response.content)
+        self.assertEquals(response.context['stores'][0], 'auchan')
+
 
 
 class LegalPageTestCase(TestCase):
@@ -236,6 +243,7 @@ class PaginationTestCase(TestCase):
         self.product1 = Product.objects.create(
             product_name="filet saumon brocolis frites",
             nutriscore="a",
+            stores="auchan, leclerc, super U",
             product_code=378293020882771,
             categories="Plats préparés,Produits à la viande,Plats préparés à la viande,Plats au bœuf",
         )
@@ -320,10 +328,11 @@ class PaginationTestCase(TestCase):
 
     # test that page are more than one if search retunr more than 12 products
     def test_index_pagination(self):
-        response =self.client.get(
+        response=self.client.get(
             reverse("search:index"), {"post": "filet"}
         )
         # print(response.context['res'])
         self.assertEquals(response.context['res'].next_page_number(), 2)
+
         
         
