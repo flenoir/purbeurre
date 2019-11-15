@@ -46,6 +46,11 @@ class DetailPageTestCase(TestCase):
         # print(response.content)
         self.assertEquals(response.context['stores'][0], 'auchan')
 
+    # test that first store button link contains store name and is present
+    def test_gps_link_on_store_button(self):
+        response = self.client.get(reverse("search:detail", args=(self.product.product_code,)))        
+        self.assertContains(response, 'https://www.google.com/maps/search/auchan/@"+lat+","+lon+",12z/data=!3m1!4b1')
+
 
 
 class LegalPageTestCase(TestCase):
